@@ -18,29 +18,29 @@ module A_rom_load(
     parameter num_1_2 = 7'd1; //column 2
     parameter num_2_2 = 7'd1;
     parameter num_3_2 = 7'd1;
-    parameter num_3_2 = 7'd1;
     parameter num_4_2 = 7'd1;
     parameter num_5_2 = 7'd1;
     parameter num_6_2 = 7'd1;
     parameter num_7_2 = 7'd1;
+    parameter num_8_2 = 7'd1;
 
     parameter num_1_3 = 7'd1; //column 3
     parameter num_2_3 = 7'd1;
-    parameter num_3_3 = 7'd1;
     parameter num_3_3 = 7'd1;
     parameter num_4_3 = 7'd1;
     parameter num_5_3 = 7'd1;
     parameter num_6_3 = 7'd1;
     parameter num_7_3 = 7'd1;
+    parameter num_8_3 = 7'd1;
 
     parameter num_1_4 = 7'd1; //column 4
     parameter num_2_4 = 7'd1;
-    parameter num_3_4 = 7'd1;
     parameter num_3_4 = 7'd1;
     parameter num_4_4 = 7'd1;
     parameter num_5_4 = 7'd1;
     parameter num_6_4 = 7'd1;
     parameter num_7_4 = 7'd1;
+    parameter num_8_4 = 7'd1;
     
     reg [3:0]  counter;
     reg [3:0]  counter_next;
@@ -69,7 +69,7 @@ end
 always @(*) begin
     counter_next = counter;
     dataROM_next = dataROM_r;
-    if(counter != 4'b15)begin
+    if(counter != 4'd15)begin
         counter_next = counter + 1'b1;
         case (counter)
             //column 1
