@@ -14,6 +14,7 @@ module top_top(
     reg [3:0] address_4_current;
 
 // outports wire
+wire [2:0] 	count_mul;
 wire       	input_load_en;
 wire       	rom_start;
 wire       	ALU_en;
@@ -38,7 +39,6 @@ u_controller(
 	.input_load_en   	( input_load_en    ),
 	.rom_start       	( rom_start        ),
 	.ALU_en          	( ALU_en           ),
-	.ram_en          	( ram_en           ),
 	.web             	( web              ),
 	.finish          	( finish           )
 );
@@ -47,7 +47,7 @@ u_controller(
 // wire       	P_out;
 // wire       	ram_done;
 // wire       	row_done;
-// wire [2:0] 	count_mul;
+
 // wire       	xload_done;
 // wire       	aload_done;
 // wire       	arithmetic_done;
@@ -59,7 +59,6 @@ logic_top u_logic_top(
 	.rom_start       	( rom_start        ),
 	.AU_en           	( AU_en            ),
 	.avgmax_en       	( avgmax_en        ),
-	.ram_en          	( ram_en           ),
 	.P_s             	( P_s              ),
 	.X_load         	( X_load           ),
 	.valid_input     	( valid_input      ),

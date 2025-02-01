@@ -48,6 +48,10 @@ always @(posedge clk or negedge rst) begin
         //update counter
         count       <= count_next;
         count_shift <= count_shift_next;
+        s_reg1      <= s_reg1_next;
+        s_reg2      <= s_reg2_next;
+        s_reg3      <= s_reg3_next;
+        s_reg4      <= s_reg4_next;
     end
 end
 

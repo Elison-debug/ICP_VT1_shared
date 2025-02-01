@@ -1,8 +1,8 @@
 module A_rom_top(
     input  clk,
     input  rst,
-    
-    input  rom_addr,
+    input  [3:0] rom_addr,
+	
     output aload_done,
     output [13:0] A_input
 );

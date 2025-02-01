@@ -2,12 +2,13 @@ module wb(
     input  clk,
     input  rst,
     input  web,
-    input  MU1,
-    input  MU2,
-    input  MU3,
-    input  MU4,
+    input  [16:0] MU1,
+    input  [16:0] MU2,
+    input  [16:0] MU3,
+    input  [16:0] MU4,
+
     output ram_en,
-    output address,
+    output [7:0]  address,
     output [31:0] dataRAM
 );
     //state
@@ -54,8 +55,15 @@ always @(posedge clk or negedge rst) begin
         result [2]  <= 17'b0;
     end
     else begin
+        //update result register
+        result [0] <= result_next[0];
+        result [1] <= result_next[1];
+        result [2] <= result_next[2];
         //update state
-        wb_state      <= wb_next;
+        wb_state  <= wb_next;
+        count     <= count_next;
+        ram_addr  <= ram_addr_next;
+
     end
 end
 

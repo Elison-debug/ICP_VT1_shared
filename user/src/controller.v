@@ -12,7 +12,6 @@ module controller(
     output input_load_en,
     output rom_start,
     output ALU_en,
-    output ram_en,
     output web,
     output finish
 );  

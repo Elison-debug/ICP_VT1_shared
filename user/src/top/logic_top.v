@@ -5,7 +5,6 @@ module logic_top(
     input  rom_start,
     input  AU_en,
     input  avgmax_en,
-    input  ram_en,
     input  P_s,
     input  [7:0] X_load,
     input  valid_input,
@@ -76,7 +75,7 @@ ALU u_ALU(
 
 // wb outports wire
 
-wire        	address;
+wire [7:0]      address;
 wire [31:0] 	dataRAM;
 
 wb #(
