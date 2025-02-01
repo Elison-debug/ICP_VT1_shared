@@ -7,7 +7,7 @@ module logic_top(
     input  avgmax_en,
     input  ram_en,
     input  P_s,
-    input  X_input,
+    input  [7:0] X_load,
     input  valid_input,
 
     output P_out,
