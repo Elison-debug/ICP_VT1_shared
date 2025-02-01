@@ -24,7 +24,7 @@ module ALU(
     reg [7:0]  matrix_coe1;
     reg [7:0]  matrix_coe2;
     reg [7:0]  matrix_coe1_next;
-    reg [7:0]  matrix_coe1_next;
+    reg [7:0]  matrix_coe2_next;
 
 always @(posedge clk or negedge rst) begin
     if(!rst) begin

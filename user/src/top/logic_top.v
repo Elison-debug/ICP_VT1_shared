@@ -39,6 +39,15 @@ X_buffer u_X_buffer(
 	.xload_done    	( xload_done     )
 );
 
+// outports wire
+wire [13:0] 	A_input;
+
+A_rom_top u_A_rom_top(
+	.clk     	( clk      ),
+	.rst     	( rst      ),
+	.rom_addr   ( rom_addr ),
+	.A_input 	( A_input  )
+);
 
 // outports wire
 wire [16:0] 	MU1;
@@ -97,16 +106,5 @@ sram_wrapper u_sram_wrapper(
     .ry         (ry        ),
     .read_data  (read_data )
 );
-
-// outports wire
-wire [13:0] 	A_input;
-
-A_rom_top u_A_rom_top(
-	.clk     	( clk      ),
-	.rst     	( rst      ),
-	.rom_addr   ( rom_addr ),
-	.A_input 	( A_input  )
-);
-
 
 endmodule

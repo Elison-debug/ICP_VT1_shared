@@ -24,27 +24,27 @@ A_rom_load #(
 	.num_1_2 	( 1  ),//column 2
 	.num_2_2 	( 2  ),
 	.num_3_2 	( 3  ),
-	.num_3_2 	( 4  ),
-	.num_4_2 	( 5  ),
-	.num_5_2 	( 6  ),
-	.num_6_2 	( 7  ),
-	.num_7_2 	( 8  ),
+	.num_4_2 	( 4  ),
+	.num_5_2 	( 5  ),
+	.num_6_2 	( 6  ),
+	.num_7_2 	( 7  ),
+	.num_8_2 	( 8  ),
 	.num_1_3 	( 1  ),//column 3
 	.num_2_3 	( 2  ),
 	.num_3_3 	( 3  ),
-	.num_3_3 	( 4  ),
-	.num_4_3 	( 5  ),
-	.num_5_3 	( 6  ),
-	.num_6_3 	( 7  ),
-	.num_7_3 	( 8  ),
+	.num_4_3 	( 4  ),
+	.num_5_3 	( 5  ),
+	.num_6_3 	( 6  ),
+	.num_7_3 	( 7  ),
+	.num_8_3 	( 8  ),
 	.num_1_4 	( 1  ),//column 4
 	.num_2_4 	( 2  ),
 	.num_3_4 	( 3  ),
-	.num_3_4 	( 4  ),
-	.num_4_4 	( 5  ),
-	.num_5_4 	( 6  ),
-	.num_6_4 	( 7  ),
-	.num_7_4 	( 8  ))
+	.num_4_4 	( 4  ),
+	.num_5_4 	( 5  ),
+	.num_6_4 	( 6  ),
+	.num_7_4 	( 7  ),
+	.num_8_4 	( 8  ))
 u_A_rom_load(
 	.clk     	( clk      ),
 	.rst     	( rst      ),
@@ -52,9 +52,6 @@ u_A_rom_load(
     .dataROM 	( dataROM  ),
     .aload_done ( aload_done)
 );
-
-// outports wire
-wire [13:0] 	A_input;
 
 A_rom u_A_rom(
 	.clk      	( clk       ),
@@ -64,7 +61,6 @@ A_rom u_A_rom(
 	.dataROM  	( dataROM   ),
 	.A_input  	( A_input   )
 );
-
 
 
 endmodule

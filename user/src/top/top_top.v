@@ -52,8 +52,4 @@ logic_top logic_top(
     .arithmetic_done(arithmetic_done)
 );
 
-
-
-
-
 endmodule
