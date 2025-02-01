@@ -40,6 +40,7 @@ X_buffer u_X_buffer(
 
 // outports wire
 wire [13:0] 	A_input;
+wire [3:0]      rom_addr;
 
 A_rom_top u_A_rom_top(
 	.clk     	( clk      ),
