@@ -3,10 +3,10 @@ module ALU(
     input  rst,
 
     input [13:0] A_input,
-    input [63:0] X_reg1,                                    // Input 8*8bit elemments per row of the input matrix 
-    input [63:0] X_reg2,
-    input [63:0] X_reg3,  
-    input [63:0] X_reg4,
+    input [8:0] X_reg1,                                    // Input 8*8bit elemments per row of the input matrix 
+    input [8:0] X_reg2,
+    input [8:0] X_reg3,  
+    input [8:0] X_reg4,
     input        ALU_en,
     
     output reg X_shift,                                     // sychronized the input resgister in the buffer. 

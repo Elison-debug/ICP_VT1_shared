@@ -93,9 +93,8 @@ u_wb(
 	.dataRAM 	( dataRAM  ) 
 );
 
-wire 	     ry   = 1'b0;
+wire 	     ry;
 wire 	     cs_n = 1'b0;
-wire [31:0]  read_data = 32'b0;
 
 sram_wrapper u_sram_wrapper(
     .clk        (clk       ),

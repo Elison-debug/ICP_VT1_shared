@@ -9,14 +9,10 @@ module top_top(
 
 // outports wire
 wire [2:0] 	count_mul;
-//wire       	ALU_en;
-wire       	ram_en;
 wire        ALU_done;
-wire       	ram_done;
 wire       	xload_done;
 wire       	aload_done;
 wire       	input_load_en;
-wire       	rom_start;
 
 
 controller #(

@@ -21,19 +21,20 @@ module wb(
     //ram address
     reg [3:0] ram_addr;
     reg [3:0] ram_addr_next;
-    assign address = ram_addr;
+    assign address = 4'b0 & ram_addr;
     
     //wb counter
     reg [1:0]  count;
     reg [1:0]  count_next;
 
     //result buffer
-    reg [16:0] result [2:0];
-    reg [16:0] result_next [1:0];
+    reg [17:0] result [2:0];
+    reg [17:0] result_next [2:0];
 
     //dataRAM and ram enable signal
     assign ram_en  =(wb_state==wb_start) ? 1'b1:1'b0;
-    assign dataRAM =(wb_state==wb_start) ? MU1 :result[count];
+    assign dataRAM[31:18] = 14'b0;
+    assign dataRAM =(wb_state == wb_start) ? MU1 :result[count];
 
 always @(posedge clk or negedge rst) begin
     if(!rst) begin
