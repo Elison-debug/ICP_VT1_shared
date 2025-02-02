@@ -70,6 +70,7 @@ always @(*) begin
     counter_next = counter;
     dataROM_next = dataROM_r;
     if(counter != 4'd15)begin
+        aload_done_r = 1'b0;
         counter_next = counter + 1'b1;
         case (counter)
             //column 1

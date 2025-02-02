@@ -2,8 +2,8 @@ module A_rom_load(
     input  clk,
     input  rst,
 
-    output w_addr,
     output aload_done,
+    output [3:0] w_addr,
     output [13:0] dataROM
 );
     parameter num_1_1 = 7'd1; //format :row_col
@@ -47,11 +47,9 @@ module A_rom_load(
     reg [13:0] dataROM_r;
     reg [13:0] dataROM_next;
 
-    reg aload_done_r;
-    
     assign w_addr     = counter; 
     assign dataROM    = dataROM_r;
-    assign aload_done = aload_done_r;
+    assign aload_done = (counter == 4'd15) ? 1'b1:1'b0;
 
 //reset and update counter and rom
 always @(posedge clk or negedge rst) begin
@@ -67,7 +65,6 @@ end
 
 //calculate counter and data rom
 always @(*) begin
-    aload_done_r = 1'b0;
     counter_next = counter;
     dataROM_next = dataROM_r;
     if(counter != 4'd15)begin
@@ -93,13 +90,9 @@ always @(*) begin
             4'b1101 : dataROM_next = num_3_4 & num_4_4;
             4'b1110 : dataROM_next = num_5_4 & num_6_4;
             4'b1111 : dataROM_next = num_7_4 & num_8_4;
-            
             default : dataROM_next = 14'b0;
         endcase
     end  
-    else begin 
-        aload_done_r = 1'b1;
-    end
 end
 
 endmodule

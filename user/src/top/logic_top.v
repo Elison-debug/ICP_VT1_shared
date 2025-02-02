@@ -75,7 +75,6 @@ ALU u_ALU(
 
 wire [7:0]      address;
 wire [31:0] 	dataRAM;
-assign dataRAM[31:18] = 0;
 
 wb #(
 	.wb_IDLE  	( 0  ),

@@ -5,17 +5,17 @@ module controller(
     input  ALU_done,
     input  xload_done,
     input  aload_done,
-    input  [2:0] count_mul,
+    (* keep = "true" *) input  [2:0] count_mul,
 
     output input_load_en,
     output ALU_en,
     output finish
 );  
     //FSM state
-    parameter IDLE = 2'b00;
+    parameter IDLE        = 2'b00;
     parameter shift_input = 2'b01;
-    parameter multiply= 2'b10;
-    parameter next_col = 2'b11;
+    parameter multiply    = 2'b10;
+    parameter next_col    = 2'b11;
     
     //state
     reg [1:0] current_state;
@@ -27,7 +27,7 @@ module controller(
 
     //enable signal
     assign ALU_en=(current_state == multiply) ? 1'b1 : 1'b0;
-    assign input_load_en=(current_state == shift_input) ? 1'b1 : 1'b0;;
+    assign input_load_en=(current_state == shift_input) ? 1'b1 : 1'b0;
 
     //finish output    
     assign finish = ALU_done;
@@ -57,11 +57,11 @@ always @(*) begin
     state_next = current_state;
     //update state
     case (current_state) 
-        IDLE        : begin state_next = (start_in   == 1'b1 ) ? shift_input:IDLE; count_col_next  = 2'b0; end//if start_in = 1 start shift
-        shift_input : state_next = (xload_done && aload_done) ? multiply:shift_input;//if finish both A and X matrix input then start multiply
-        multiply    : state_next = (count_mul == 3'd7 ) ? next_col:multiply;//if count_mul = 8 start next_col
-        next_col    : begin state_next = (count_col == 2'd3 ) ? IDLE:multiply; count_col_next = count_col + 1'b1; end //if count_col = 3 go IDLE, else back to multiply next col
-        default     : state_next = IDLE;//default IDLE
+        IDLE        : begin state_next = (start_in   == 1'b1) ? shift_input: IDLE; count_col_next  = 2'b0; end//if start_in = 1 start shift
+        shift_input : state_next = (xload_done && aload_done) ? multiply   : shift_input;//if finish both A and X matrix input then start multiply
+        multiply    : state_next = (count_mul == 3'b111     ) ? next_col   : multiply;//if count_mul = 8 start next_col
+        next_col    : begin state_next = (count_col == 2'b11) ? IDLE       : multiply; count_col_next = count_col + 2'b1; end //if count_col = 3 go IDLE, else back to multiply next col
+        default     : begin state_next = IDLE;count_col_next = 2'b0; end //default IDLE
     endcase
 end
 

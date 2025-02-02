@@ -36,8 +36,9 @@ module X_buffer(
     assign X_reg2 = s_reg2[63:56];
     assign X_reg3 = s_reg3[63:56];
     assign X_reg4 = s_reg4[63:56];
+
     //load done flag
-    assign xload_done = (count == 5'd31)? 1'b1:1'b0;
+    assign xload_done = (count == 5'b11111)? 1'b1:1'b0;
 
 always @(posedge clk or negedge rst) begin
     if(!rst) begin
