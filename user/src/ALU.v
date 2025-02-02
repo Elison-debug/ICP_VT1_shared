@@ -70,7 +70,7 @@ module ALU(
         X_shift_next = X_shift;
         ALU_done_next = ALU_done; 
         web_next = web;
-        rom_addr_next <= rom_addr; 
+        rom_addr_next = rom_addr; 
         if (ALU_en == 1) begin
             X_shift_next = 1'b1; 
             count_mul_next = count_mul + 1;
