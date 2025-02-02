@@ -34,7 +34,7 @@ module ALU(
     // signal connection
     wire [6:0]  data_odd = A_input [13:7];
     wire [6:0]  data_even = A_input [6:0];
-
+    reg  [6:0]  A, A_NEXT; 
     // 
     reg         web_next;
     reg         ALU_done_next;    
@@ -60,7 +60,8 @@ module ALU(
                 MU3 <= MU3_r_next; 
                 MU4 <= MU4_r_next;
                 web <= web_next; 
-                ALU_done <= ALU_done_next;  
+                ALU_done <= ALU_done_next;
+                A <= A_NEXT;   
         end
     end
 
@@ -71,16 +72,22 @@ module ALU(
         ALU_done_next = ALU_done; 
         web_next = web;
         rom_addr_next = rom_addr; 
+        A_NEXT = A; 
         if (ALU_en == 1) begin
             X_shift_next = 1'b1; 
             count_mul_next = count_mul + 1;
-            global_counter_next = global_counter + 1;   
+            global_counter_next = global_counter + 1;
+            MU1_r_next = A*X_reg1[63:56] + MU1;
+            MU2_r_next = A*X_reg2[63:56] + MU2;
+            MU3_r_next = A*X_reg3[63:56] + MU3;
+            MU4_r_next = A*X_reg4[63:56] + MU4;    
             if ((count_mul[0]) == 1) begin
                 rom_addr_next = rom_addr + 1; 
-                MU1_r_next = data_even*X_reg1[63:56] + MU1;
-                MU2_r_next = data_even*X_reg2[63:56] + MU2;
-                MU3_r_next = data_even*X_reg3[63:56] + MU3;
-                MU4_r_next = data_even*X_reg4[63:56] + MU4; 
+                // MU1_r_next = data_even*X_reg1[63:56] + MU1;
+                // MU2_r_next = data_even*X_reg2[63:56] + MU2;
+                // MU3_r_next = data_even*X_reg3[63:56] + MU3;
+                // MU4_r_next = data_even*X_reg4[63:56] + MU4;
+                A_NEXT = data_even; 
                 if (count_mul == 3'd7) begin
                     MU1_r_next = 18'b0; 
                     MU2_r_next = 18'b0; 
@@ -101,10 +108,11 @@ module ALU(
             else begin
                 ALU_done_next = 1'b0; 
                 web_next = 1'b0;
-                MU1_r_next = data_odd*X_reg1[63:56] + MU1;
-                MU2_r_next = data_odd*X_reg2[63:56] + MU2;
-                MU3_r_next = data_odd*X_reg3[63:56] + MU3;
-                MU4_r_next = data_odd*X_reg4[63:56] + MU4;
+                // MU1_r_next = data_odd*X_reg1[63:56] + MU1;
+                // MU2_r_next = data_odd*X_reg2[63:56] + MU2;
+                // MU3_r_next = data_odd*X_reg3[63:56] + MU3;
+                // MU4_r_next = data_odd*X_reg4[63:56] + MU4;
+                A_NEXT = data_odd;
             end
         end
         else begin
@@ -114,6 +122,7 @@ module ALU(
             count_mul_next = 1'b0;  
             web_next = 1'b0;
             ALU_done_next = 1'b0;
+            A_NEXT = 7'b0; 
             MU1_r_next = 18'b0; MU2_r_next = 18'b0; MU3_r_next = 18'b0; MU4_r_next = 18'b0; 
         end
     end 
