@@ -32,10 +32,11 @@ u_controller(
 	.ram_done        	( ram_done         ),
 	.row_done        	( row_done         ),
 	.start_in        	( start_in         ),
+	.ALU_done 	        ( ALU_done         ),
 	.xload_done      	( xload_done       ),
 	.aload_done      	( aload_done       ),
-	.arithmetic_done 	( arithmetic_done  ),
 	.count_mul       	( count_mul        ),
+	.ALU_en             ( ALU_en           ),
 	.input_load_en   	( input_load_en    ),
 	.rom_start       	( rom_start        ),
 	.ALU_en          	( ALU_en           ),
@@ -55,20 +56,23 @@ u_controller(
 logic_top u_logic_top(
 	.clk             	( clk              ),
 	.rst             	( rst              ),
-	.input_load_en   	( input_load_en    ),
-	.rom_start       	( rom_start        ),
-	.AU_en           	( AU_en            ),
-	.avgmax_en       	( avgmax_en        ),
 	.P_s             	( P_s              ),
+	.AU_en           	( AU_en            ),
+	.ALU_en             ( ALU_en           ),
 	.X_load         	( X_load           ),
+	.rom_start       	( rom_start        ),
+	.avgmax_en       	( avgmax_en        ),
 	.valid_input     	( valid_input      ),
+	.input_load_en   	( input_load_en    ),
+	
+
 	.P_out           	( P_out            ),
 	.ram_done        	( ram_done         ),
 	.row_done        	( row_done         ),
 	.count_mul       	( count_mul        ),
 	.xload_done      	( xload_done       ),
 	.aload_done      	( aload_done       ),
-	.arithmetic_done 	( arithmetic_done  )
+	.ALU_done 	        ( ALU_done         )
 );
 
 

@@ -6,16 +6,17 @@ module logic_top(
     input  AU_en,
     input  avgmax_en,
     input  P_s,
+	input  ALU_en,
     input  [7:0] X_load,
     input  valid_input,
 
     output P_out,
+	output ALU_done,
     output ram_done,
     output row_done,
     output [2:0] count_mul,
     output xload_done,
-    output aload_done,
-    output arithmetic_done
+    output aload_done
 );
 
 // outports wire
@@ -60,6 +61,7 @@ ALU u_ALU(
 	.clk       	( clk        ),
 	.rst       	( rst        ),
 	.A_input   	( A_input    ),
+	.ALU_en     ( ALU_en     ),
 	.X_reg1    	( X_reg1     ),
 	.X_reg2    	( X_reg2     ),
 	.X_reg3    	( X_reg3     ),
