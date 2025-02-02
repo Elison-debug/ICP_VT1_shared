@@ -2,18 +2,11 @@ module logic_top(
     input  clk,
     input  rst,
     input  input_load_en,
-    input  rom_start,
-    input  AU_en,
-    input  avgmax_en,
-    input  P_s,
 	input  ALU_en,
     input  [7:0] X_load,
     input  valid_input,
 
-    output P_out,
 	output ALU_done,
-    output ram_done,
-    output row_done,
     output [2:0] count_mul,
     output xload_done,
     output aload_done
@@ -44,19 +37,19 @@ wire [13:0] 	A_input;
 wire [3:0]      rom_addr;
 
 A_rom_top u_A_rom_top(
-	.clk     	( clk      ),
-	.rst     	( rst      ),
-	.rom_addr   ( rom_addr ),
-	.A_input 	( A_input  )
+	.clk     	( clk       ),
+	.rst     	( rst       ),
+	.rom_addr   ( rom_addr  ),
+	.aload_done ( aload_done),
+	.A_input 	( A_input   )
 );
 
 // outports wire
-wire [16:0] 	MU1;
-wire [16:0] 	MU2;
-wire [16:0] 	MU3;
-wire [16:0] 	MU4;
-wire [3:0] 	    rom_adr;
-
+wire [17:0] 	MU1;
+wire [17:0] 	MU2;
+wire [17:0] 	MU3;
+wire [17:0] 	MU4;
+wire            web;
 ALU u_ALU(
 	.clk       	( clk        ),
 	.rst       	( rst        ),
@@ -71,6 +64,8 @@ ALU u_ALU(
 	.MU2       	( MU2        ),
 	.MU3       	( MU3        ),
 	.MU4       	( MU4        ),
+	.web        ( web        ),
+	.ALU_done   ( ALU_done   ),
     .rom_addr   ( rom_addr   ),
 	.count_mul 	( count_mul  )
 );
@@ -80,6 +75,7 @@ ALU u_ALU(
 
 wire [7:0]      address;
 wire [31:0] 	dataRAM;
+assign dataRAM[31:18] = 0;
 
 wb #(
 	.wb_IDLE  	( 0  ),
@@ -97,8 +93,10 @@ u_wb(
 	.dataRAM 	( dataRAM  ) 
 );
 
-wire 	     ry;
-wire [31:0]  read_data;
+wire 	     ry   = 1'b0;
+wire 	     cs_n = 1'b0;
+wire [31:0]  read_data = 32'b0;
+
 sram_wrapper u_sram_wrapper(
     .clk        (clk       ),
     .cs_n       (cs_n      ),

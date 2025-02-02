@@ -32,10 +32,10 @@ module X_buffer(
     reg [63:0] s_reg4_next;
     
     // X buffer output
-    assign x_reg1 = s_reg1;
-    assign x_reg2 = s_reg2;
-    assign x_reg3 = s_reg3;
-    assign x_reg4 = s_reg4;
+    assign X_reg1 = s_reg1;
+    assign X_reg2 = s_reg2;
+    assign X_reg3 = s_reg3;
+    assign X_reg4 = s_reg4;
     //load done flag
     assign xload_done = (count == 5'd31)? 1'b1:1'b0;
 
