@@ -58,6 +58,7 @@ module ALU(
         end
     end
 
+    123;
     always @(*) begin 
         if (ALU_en == 1) begin
             X_shift_next = X_shift + 1; 
