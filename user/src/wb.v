@@ -2,10 +2,10 @@ module wb(
     input  clk,
     input  rst,
     input  web,
-    input  [16:0] MU1,
-    input  [16:0] MU2,
-    input  [16:0] MU3,
-    input  [16:0] MU4,
+    input  [17:0] MU1,
+    input  [17:0] MU2,
+    input  [17:0] MU3,
+    input  [17:0] MU4,
 
     output ram_en,
     output [7:0]  address,
@@ -24,19 +24,11 @@ module wb(
     assign address = ram_addr;
     
     //wb counter
-    reg [1:0] count_wb;
-    reg [1:0] count_wb_next;
-
-    // ram 
-    // parameter wordsize = 32, memsize = 16;  
-    // reg [wordsize-1:0] RAM [memsize-1:0];
-    // reg [wordsize-1:0] RAM_next [memsize-1:0];
+    reg [1:0]  count;
+    reg [1:0]  count_next;
 
     //result buffer
-    reg [1:0]  count;
     reg [16:0] result [2:0];
-
-    reg [1:0]  count_next;
     reg [16:0] result_next [1:0];
 
     //dataRAM and ram enable signal
@@ -48,7 +40,7 @@ always @(posedge clk or negedge rst) begin
         //RAM [0]     <= 1'b0;
         count       <= 2'b0;
         ram_addr    <= 4'b0;
-        count_wb    <= 2'b0;
+        //count_wb    <= 2'b0;
         wb_state    <= 1'b0;
         result [0]  <= 17'b0;
         result [1]  <= 17'b0;
@@ -92,7 +84,7 @@ always @(*) begin
         wb_start :begin
             count_next = count_next+ 1'b1;
             ram_addr_next = ram_addr_next + 1'b1;
-            wb_next = (count_wb == 2'd3 ) ? wb_IDLE:wb_start;//if count=3 end wb
+            wb_next = (count == 2'd3 ) ? wb_IDLE:wb_start;//if count=3 end wb
         end
 
         default  :begin 
