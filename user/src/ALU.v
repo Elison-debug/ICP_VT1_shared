@@ -34,8 +34,12 @@ module ALU(
     // signal connection
     wire [6:0]  data_odd = A_input [13:7];
     wire [6:0]  data_even = A_input [6:0];
-     
 
+    // 
+    reg         web_next;
+    reg         ALU_done_next;    
+
+    // cl and rst. 
     always @(posedge clk or negedge rst) begin
         if(!rst) begin
             MU1 <= 0; MU2 <= 0; MU3 <= 0; MU4 <= 0;
@@ -54,11 +58,18 @@ module ALU(
                 MU1 <= MU1_r_next; 
                 MU2 <= MU2_r_next; 
                 MU3 <= MU3_r_next; 
-                MU4 <= MU4_r_next; 
+                MU4 <= MU4_r_next;
+                web <= web_next; 
+                ALU_done <= ALU_done_next;  
         end
     end
 
-    always @(*) begin 
+    // ALU
+    always @(*) begin
+        // Default value. 
+        X_shift_next = X_shift;
+        ALU_done_next <= ALU_done; 
+        web_next <= web;
         if (ALU_en == 1) begin
             X_shift_next = 1'b1; 
             count_mul_next = count_mul + 1;
@@ -70,21 +81,25 @@ module ALU(
                 MU3_r_next = data_even*X_reg3[63:56] + MU3;
                 MU4_r_next = data_even*X_reg4[63:56] + MU4; 
                 if (count_mul == 3'd7) begin
+                    MU1_r_next = 18'b0; 
+                    MU2_r_next = 18'b0; 
+                    MU3_r_next = 18'b0; 
+                    MU4_r_next = 18'b0;
                     web = 1; 
                     if (global_counter == 5'd31) begin
-                        ALU_done= 1;
+                        ALU_done_next= 1'b1;
                     end
                     else begin
-                        ALU_done= 0; 
+                        ALU_done_next= 1'b0; 
                     end
                 end
                 else begin
-                    web = 0; 
+                    web_next = 1'b0; 
                 end 
             end
             else begin
-                ALU_done= 0; 
-                web = 0;
+                ALU_done_next = 1'b0; 
+                web_next = 1'b0;
                 MU1_r_next = data_odd*X_reg1[63:56] + MU1;
                 MU2_r_next = data_odd*X_reg2[63:56] + MU2;
                 MU3_r_next = data_odd*X_reg3[63:56] + MU3;
@@ -94,11 +109,11 @@ module ALU(
         else begin
             // Finish the multiply and back to controller IDLE. Prepare to next input matrix.
             X_shift_next = 1'b0;
-            global_counter_next = 0; 
-            count_mul_next = 0;  
-            web = 0;
-            ALU_done= 0;
-            MU1_r_next = 0; MU2_r_next = 0; MU3_r_next = 0; MU4_r_next = 0; 
+            global_counter_next = 1'b0; 
+            count_mul_next = 1'b0;  
+            web_next = 1'b0;
+            ALU_done_next = 1'b0;
+            MU1_r_next = 18'b0; MU2_r_next = 18'b0; MU3_r_next = 18'b0; MU4_r_next = 18'b0; 
         end
     end 
 
