@@ -68,8 +68,8 @@ module ALU(
     always @(*) begin
         // Default value. 
         X_shift_next = X_shift;
-        ALU_done_next <= ALU_done; 
-        web_next <= web;
+        ALU_done_next = ALU_done; 
+        web_next = web;
         if (ALU_en == 1) begin
             X_shift_next = 1'b1; 
             count_mul_next = count_mul + 1;
