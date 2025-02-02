@@ -37,11 +37,7 @@ module top_tb();
         //#10000  b_Enter=1'b1;
         //#1000   b_Enter=1'b0;
         //#100    in = 00010110;
-        #100    in = input_B;
-        #10000  b_Enter=1'b1;
-        #1000   b_Enter=1'b0;
-      #100000 b_sign=1'b1;
-        #1000   b_sign=1'b0;
+
 
     end
     
