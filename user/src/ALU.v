@@ -16,8 +16,8 @@ module ALU(
     output reg [17:0] MU4,
     output reg [3:0] rom_addr,                                  // Read coe from the ROM to the ALU, calculate the address to indicate the coe that the ROM need.     
     output reg [2:0] count_mul,
-    output reg four_results_ready,
-    output reg all_results_ready    
+    output reg web,
+    output reg ALU_done   
 );
     // Reg for the mul op counter. 
     reg [2:0]   count_mul_next;
@@ -43,8 +43,8 @@ module ALU(
             rom_addr <= 0;
             count_mul <= 0;
             global_counter <= 0; 
-            four_results_ready <= 0;
-            all_results_ready <= 0; 
+            web <= 0;
+            ALU_done<= 0; 
         end
         else begin
                 count_mul <= count_mul_next;
@@ -60,7 +60,7 @@ module ALU(
 
     always @(*) begin 
         if (ALU_en == 1) begin
-            X_shift_next = X_shift + 1; 
+            X_shift_next = 1'b1; 
             count_mul_next = count_mul + 1;
             global_counter_next = global_counter + 1;   
             if ((count_mul[0]) == 1) begin
@@ -70,21 +70,21 @@ module ALU(
                 MU3_r_next = data_even*X_reg3[63:56] + MU3;
                 MU4_r_next = data_even*X_reg4[63:56] + MU4; 
                 if (count_mul == 3'd7) begin
-                    four_results_ready = 1; 
+                    web = 1; 
                     if (global_counter == 5'd31) begin
-                        all_results_ready = 1;
+                        ALU_done= 1;
                     end
                     else begin
-                        all_results_ready = 0; 
+                        ALU_done= 0; 
                     end
                 end
                 else begin
-                    four_results_ready = 0; 
+                    web = 0; 
                 end 
             end
             else begin
-                all_results_ready = 0; 
-                four_results_ready = 0;
+                ALU_done= 0; 
+                web = 0;
                 MU1_r_next = data_odd*X_reg1[63:56] + MU1;
                 MU2_r_next = data_odd*X_reg2[63:56] + MU2;
                 MU3_r_next = data_odd*X_reg3[63:56] + MU3;
@@ -92,11 +92,12 @@ module ALU(
             end
         end
         else begin
-            // Finish the multiply and back to controller IDLE. Prepare to next input matrix.. 
+            // Finish the multiply and back to controller IDLE. Prepare to next input matrix.
+            X_shift_next = 1'b0;
             global_counter_next = 0; 
             count_mul_next = 0;  
-            four_results_ready = 0;
-            all_results_ready = 0;
+            web = 0;
+            ALU_done= 0;
             MU1_r_next = 0; MU2_r_next = 0; MU3_r_next = 0; MU4_r_next = 0; 
         end
     end 
