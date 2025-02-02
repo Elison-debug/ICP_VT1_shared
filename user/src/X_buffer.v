@@ -7,10 +7,10 @@ module X_buffer(
     //input  ram_en,
     input  X_shift,
     
-    output [63:0] X_reg1,
-    output [63:0] X_reg2,
-    output [63:0] X_reg3,
-    output [63:0] X_reg4,
+    output [7:0] X_reg1,
+    output [7:0] X_reg2,
+    output [7:0] X_reg3,
+    output [7:0] X_reg4,
     output xload_done
 );
     //counter
@@ -32,10 +32,10 @@ module X_buffer(
     reg [63:0] s_reg4_next;
     
     // X buffer output
-    assign X_reg1 = s_reg1;
-    assign X_reg2 = s_reg2;
-    assign X_reg3 = s_reg3;
-    assign X_reg4 = s_reg4;
+    assign X_reg1 = s_reg1[63:56];
+    assign X_reg2 = s_reg2[63:56];
+    assign X_reg3 = s_reg3[63:56];
+    assign X_reg4 = s_reg4[63:56];
     //load done flag
     assign xload_done = (count == 5'd31)? 1'b1:1'b0;
 

@@ -3,10 +3,10 @@ module ALU(
     input  rst,
 
     input [13:0] A_input,
-    input [63:0] X_reg1,                                    // Input 8*8bit elemments per row of the input matrix 
-    input [63:0] X_reg2,
-    input [63:0] X_reg3,  
-    input [63:0] X_reg4,
+    input [8:0] X_reg1,                                    // Input 8*8bit elemments per row of the input matrix 
+    input [8:0] X_reg2,
+    input [8:0] X_reg3,  
+    input [8:0] X_reg4,
     input        ALU_en,
     
     output reg X_shift,                                     // sychronized the input resgister in the buffer. 
@@ -77,10 +77,10 @@ module ALU(
             global_counter_next = global_counter + 1;   
             if ((count_mul[0]) == 1) begin
                 rom_addr_next = rom_addr + 1; 
-                MU1_r_next = data_even*X_reg1[63:56] + MU1;
-                MU2_r_next = data_even*X_reg2[63:56] + MU2;
-                MU3_r_next = data_even*X_reg3[63:56] + MU3;
-                MU4_r_next = data_even*X_reg4[63:56] + MU4; 
+                MU1_r_next = data_even*X_reg1 + MU1;
+                MU2_r_next = data_even*X_reg2 + MU2;
+                MU3_r_next = data_even*X_reg3 + MU3;
+                MU4_r_next = data_even*X_reg4 + MU4; 
                 if (count_mul == 3'd7) begin
                     MU1_r_next = 18'b0; 
                     MU2_r_next = 18'b0; 
@@ -101,10 +101,10 @@ module ALU(
             else begin
                 ALU_done_next = 1'b0; 
                 web_next = 1'b0;
-                MU1_r_next = data_odd*X_reg1[63:56] + MU1;
-                MU2_r_next = data_odd*X_reg2[63:56] + MU2;
-                MU3_r_next = data_odd*X_reg3[63:56] + MU3;
-                MU4_r_next = data_odd*X_reg4[63:56] + MU4;
+                MU1_r_next = data_odd*X_reg1 + MU1;
+                MU2_r_next = data_odd*X_reg2 + MU2;
+                MU3_r_next = data_odd*X_reg3 + MU3;
+                MU4_r_next = data_odd*X_reg4 + MU4;
             end
         end
         else begin
