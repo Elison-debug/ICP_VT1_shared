@@ -85,7 +85,7 @@ module ALU(
                     MU2_r_next = 18'b0; 
                     MU3_r_next = 18'b0; 
                     MU4_r_next = 18'b0;
-                    web = 1; 
+                    web_next = 1; 
                     if (global_counter == 5'd31) begin
                         ALU_done_next= 1'b1;
                     end
