@@ -78,9 +78,9 @@ always @(*) begin
     end
     else if(X_shift) begin
         s_reg1_next = s_reg1_next<<8 & s_reg1_next[63:56];
-        s_reg2_next = s_reg2_next<<8 & s_reg1_next[63:56];
-        s_reg3_next = s_reg3_next<<8 & s_reg1_next[63:56];
-        s_reg4_next = s_reg4_next<<8 & s_reg1_next[63:56];
+        s_reg2_next = s_reg2_next<<8 & s_reg2_next[63:56];
+        s_reg3_next = s_reg3_next<<8 & s_reg3_next[63:56];
+        s_reg4_next = s_reg4_next<<8 & s_reg4_next[63:56];
     end
 end
 

@@ -77,10 +77,10 @@ module ALU(
             X_shift_next = 1'b1; 
             count_mul_next = count_mul + 1;
             global_counter_next = global_counter + 1;
-            MU1_r_next = A*X_reg1[63:56] + MU1;
-            MU2_r_next = A*X_reg2[63:56] + MU2;
-            MU3_r_next = A*X_reg3[63:56] + MU3;
-            MU4_r_next = A*X_reg4[63:56] + MU4;    
+            MU1_r_next = A*X_reg1 + MU1;
+            MU2_r_next = A*X_reg2 + MU2;
+            MU3_r_next = A*X_reg3 + MU3;
+            MU4_r_next = A*X_reg4 + MU4;    
             if ((count_mul[0]) == 1) begin
                 rom_addr_next = rom_addr + 1; 
                 // MU1_r_next = data_even*X_reg1[63:56] + MU1;

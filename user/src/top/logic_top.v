@@ -36,11 +36,10 @@ X_buffer u_X_buffer(
 wire [13:0] 	A_input;
 wire [3:0]      rom_addr;
 
-A_rom_top u_A_rom_top(
+A_rom u_A_rom(
 	.clk     	( clk       ),
 	.rst     	( rst       ),
 	.rom_addr   ( rom_addr  ),
-	.aload_done ( aload_done),
 	.A_input 	( A_input   )
 );
 
