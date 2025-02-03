@@ -6,10 +6,9 @@ module logic_top(
     input  [7:0] X_load,
     input  valid_input,
 
+	output web,
 	output ALU_done,
-    output [2:0] count_mul,
-    output xload_done,
-    output aload_done
+    output xload_done
 );
 
 // outports wire
@@ -48,7 +47,7 @@ wire [17:0] 	MU1;
 wire [17:0] 	MU2;
 wire [17:0] 	MU3;
 wire [17:0] 	MU4;
-wire            web;
+
 ALU u_ALU(
 	.clk       	( clk        ),
 	.rst       	( rst        ),
@@ -65,8 +64,7 @@ ALU u_ALU(
 	.MU4       	( MU4        ),
 	.web        ( web        ),
 	.ALU_done   ( ALU_done   ),
-    .rom_addr   ( rom_addr   ),
-	.count_mul 	( count_mul  )
+    .rom_addr   ( rom_addr   )
 );
 
 
@@ -75,10 +73,7 @@ ALU u_ALU(
 wire [7:0]      address;
 wire [31:0] 	dataRAM;
 
-wb #(
-	.wb_IDLE  	( 0  ),
-	.wb_start 	( 1  ))
-u_wb(
+wb u_wb(
 	.clk     	( clk      ),
 	.rst     	( rst      ),
 	.web     	( web      ),

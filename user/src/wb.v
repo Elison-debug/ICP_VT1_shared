@@ -21,31 +21,27 @@ module wb(
     //ram address
     reg [3:0] ram_addr;
     reg [3:0] ram_addr_next;
-    assign address = 4'b0 & ram_addr;
-    
-    //wb counter
-    reg [1:0]  count;
-    reg [1:0]  count_next;
+    assign address = {4'b0 , ram_addr};
 
     //result buffer
     reg [17:0] result [2:0];
     reg [17:0] result_next [2:0];
 
     //dataRAM and ram enable signal
-    assign ram_en  =(wb_state==wb_start) ? 1'b1:1'b0;
+    reg [17:0] ram ;
+    wire [1:0] count;
+    assign count = ram_addr[1:0];
     assign dataRAM[31:18] = 14'b0;
-    assign dataRAM =(wb_state == wb_start) ? MU1 :result[count];
+    assign dataRAM[17: 0] = wb_state ? MU1 : result[count-1];//(wb_state == wb_start) but wb_start=1
+    assign ram_en = wb_state||web;//(wb_state == wb_start) but wb_start=1
 
 always @(posedge clk or negedge rst) begin
     if(!rst) begin
-        //RAM [0]     <= 1'b0;
-        count       <= 2'b0;
         ram_addr    <= 4'b0;
-        //count_wb    <= 2'b0;
-        wb_state    <= 1'b0;
         result [0]  <= 17'b0;
         result [1]  <= 17'b0;
         result [2]  <= 17'b0;
+        wb_state    <= wb_IDLE;
     end
     else begin
         //update result register
@@ -54,44 +50,20 @@ always @(posedge clk or negedge rst) begin
         result [2] <= result_next[2];
         //update state
         wb_state  <= wb_next;
-        count     <= count_next;
         ram_addr  <= ram_addr_next;
 
     end
 end
 
 always @(*) begin
-    //RAM_next[0] = RAM[0];
-    wb_next    = wb_state;
-    count_next = count ;
-    ram_addr_next = ram_addr;
-    result_next[0] = result[0];
-    result_next[1] = result[1];
-    result_next[2] = result[2];
+    wb_next = wb_state;
+    ram_addr_next  = web ? ram_addr + 4'b1 : ram_addr; //if ram en then count else wait
+    result_next[0] = web ? MU2 : result[0];
+    result_next[1] = web ? MU3 : result[1];
+    result_next[2] = web ? MU4 : result[2];
     case(wb_state)                                   
-        wb_IDLE :begin
-            wb_next = (web == 1'b1) ? wb_start:wb_IDLE;//if web = 1 start wb
-            if(web == 1'b1) begin
-                //RAM_next[ram_addr]  = MU1;
-                count_next = 0;
-                result_next[0] = MU2;
-                result_next[1] = MU3;
-                result_next[2] = MU4;
-                
-                ram_addr_next = ram_addr_next+1'b1;
-            end
-        end
-            
-        wb_start :begin
-            count_next = count_next+ 1'b1;
-            ram_addr_next = ram_addr_next + 1'b1;
-            wb_next = (count == 2'd3 ) ? wb_IDLE:wb_start;//if count=3 end wb
-        end
-
-        default  :begin 
-            wb_next = wb_IDLE;//default IDLE
-        end
-
+        wb_IDLE  : wb_next = web ? wb_start : wb_IDLE;//if web = 1 start wb            
+        wb_start : wb_next = (count == 2'b00) ? wb_start : wb_IDLE;//if web = 1 start wb
     endcase 
 end
 

@@ -17,9 +17,6 @@ module X_buffer(
     reg [4:0] count;
     reg [4:0] count_next;
 
-    reg [1:0] count_shift;
-    reg [1:0] count_shift_next;
-
     // four X buffer
     reg [63:0] s_reg1;
     reg [63:0] s_reg2;
@@ -42,13 +39,15 @@ module X_buffer(
 
 always @(posedge clk or negedge rst) begin
     if(!rst) begin
-        count       <= 4'b0;
-        count_shift <= 2'b0;
+        s_reg1      <= 64'b0;
+        s_reg2      <= 64'b0;
+        s_reg3      <= 64'b0;
+        s_reg4      <= 64'b0;
+        count       <= 5'b0;
     end
     else begin
         //update counter
         count       <= count_next;
-        count_shift <= count_shift_next;
         s_reg1      <= s_reg1_next;
         s_reg2      <= s_reg2_next;
         s_reg3      <= s_reg3_next;
@@ -63,24 +62,22 @@ always @(*) begin
     s_reg2_next    = s_reg2;
     s_reg3_next    = s_reg3;
     s_reg4_next    = s_reg4;
-    count_shift_next = count_shift;
 
     if(input_load_en && valid_input)begin
-        case(count_shift)
-        2'b00 : s_reg1_next = s_reg1_next<<8 & X_load ;
-        2'b01 : s_reg2_next = s_reg2_next<<8 & X_load ;
-        2'b10 : s_reg3_next = s_reg3_next<<8 & X_load ;
-        2'b11 : s_reg4_next = s_reg4_next<<8 & X_load ;
+        case(count[1:0])
+        2'b00 : s_reg1_next = {s_reg1[55:0] , X_load} ;
+        2'b01 : s_reg2_next = {s_reg2[55:0] , X_load} ;
+        2'b10 : s_reg3_next = {s_reg3[55:0] , X_load} ;
+        2'b11 : s_reg4_next = {s_reg4[55:0] , X_load} ;
         //default
         endcase
-        count_next       = count_next + 1'b1; 
-        count_shift_next = count_shift_next + 1'b1;
+        count_next       = count + 5'b1;
     end
     else if(X_shift) begin
-        s_reg1_next = s_reg1_next<<8 & s_reg1_next[63:56];
-        s_reg2_next = s_reg2_next<<8 & s_reg2_next[63:56];
-        s_reg3_next = s_reg3_next<<8 & s_reg3_next[63:56];
-        s_reg4_next = s_reg4_next<<8 & s_reg4_next[63:56];
+        s_reg1_next = {s_reg1[55:0] , s_reg1[63:56]};
+        s_reg2_next = {s_reg2[55:0] , s_reg2[63:56]};
+        s_reg3_next = {s_reg3[55:0] , s_reg3[63:56]};
+        s_reg4_next = {s_reg4[55:0] , s_reg4[63:56]};
     end
 end
 
