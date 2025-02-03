@@ -1,14 +1,40 @@
+clear all;
 % generate 64 random numbers. 
-nums = randi([0, 255], 64, 1);
+num_A = randi([0, 255], 64, 1);
+num_X = randi([0, 255], 64, 1);
+
+matrix_A_1 = reshape(num_A(1 :32),8,4); 
+matrix_A_2 = reshape(num_A(33:64),8,4);
+matrix_X_1 = reshape(num_X(1 :32),4,8); 
+matrix_X_2 = reshape(num_X(33:64),4,8);
+
+result_1 = matrix_X_1 * matrix_A_1;
+result_2 = matrix_X_2 * matrix_A_2;
+
 
 % open the file and write in
-fid = fopen('stimulit.txt', 'w');
-if fid == -1
-    error('can not get access to the file');
+fid_A = fopen('user/data/A_input.txt', 'w');
+if fid_A == -1
+    error('can not get access to the A file');
+end
+
+fid_X = fopen('user/data/X_input.txt', 'w');
+if fid_X == -1
+    error('can not get access to the A file');
+end
+
+fid_result = fopen('user/data/result.txt', 'w');
+if fid_result == -1
+    error('can not get access to the result file');
 end
 
 % every number occupy one single row. 
-fprintf(fid, '%d\n', nums);
+fprintf(fid_A, '%d\n', num_A);
+fprintf(fid_X, '%d\n', num_X);
+fprintf(fid_result, '%d\n', result_1);
+fprintf(fid_result, '%d\n', result_2);
 
 % close the file. 
-fclose(fid);
+fclose(fid_A);
+fclose(fid_X);
+fclose(fid_result);

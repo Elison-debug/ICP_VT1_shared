@@ -19,12 +19,12 @@ module ALU(
     output ALU_done   
 );
     // Reg for the mul op counter. 
-    reg [4:0] counter, counter_next;
-    assign rom_addr  = counter[4:1];
+    reg [6:0] counter, counter_next;
+    assign rom_addr  = counter[6:1];
 
     // shift finish and web signal
     assign X_shift = ALU_en ? 1'b1 : 1'b0;
-    assign ALU_done= ALU_en||(counter == 5'd31);
+    assign ALU_done= ALU_en||(counter[4:0] == 5'd31);
     assign web     = ALU_en||(counter[2:0] == 3'd7);
 
     // MU Reg

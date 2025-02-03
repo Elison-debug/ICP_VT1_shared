@@ -1,4 +1,4 @@
-module top_top(
+module top_top_test(
     input  clk,
     input  rst,
 	input  ry,
@@ -28,7 +28,7 @@ controller u_controller(
 	.finish          	( finish           )
 );
 
-logic_top u_logic_top(
+logic_top_test u_logic_top_test(
 	.clk             	( clk              ),
 	.rst             	( rst              ),
 	.cs_n               ( cs_n             ),

@@ -1,4 +1,4 @@
-module logic_top(
+module logic_top_test(
     input  clk,
     input  rst,
 	input  ry,
@@ -39,7 +39,7 @@ X_buffer u_X_buffer(
 wire [13:0] 	A_input;
 wire [3:0]      rom_addr;
 
-A_rom u_A_rom(
+A_rom_test u_A_rom_test(
 	.clk     	( clk       ),
 	.rst     	( rst       ),
 	.rom_addr   ( rom_addr  ),

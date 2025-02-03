@@ -7,9 +7,9 @@ module A_rom_test(
 );
 
     localparam NUM_KEYS = 32;   //total data num    
-    localparam INPUT_FILE = "A_input.txt";
+    localparam INPUT_FILE = "../Matrix/verilog/user/data/A_input.txt";
 
-    reg [6:0] memory [0:NUM_KEYS-1]; // 7 bit memory with 16 entries
+    reg [6:0] memory [0:NUM_KEYS-1]; // 7 bit memory with 32 entries
     integer memory_index = 0;
 
     reg [13:0] rom_out;
@@ -30,7 +30,7 @@ always @(posedge clk or negedge rst) begin
 end
 
 always @(*) begin
-    rom_out_next =memory[rom_addr[3:1]] & memory[rom_addr[3:1]+1];
+    rom_out_next ={memory[rom_addr[3:1]],memory[rom_addr[3:1]+1]};//store two column number in one word
 end
 
 endmodule
