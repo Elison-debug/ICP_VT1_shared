@@ -29,7 +29,7 @@ module top_tb();
     wire valid_input;
     wire [7:0] X_load;
     assign valid_input = (state == X_input);
-    assign X_load =(state_next == X_input)? memory[matrix_count]:0;
+    assign X_load =(state == X_input)? memory[matrix_count]:0;
 
     // outports wire
     wire       	finish; 
@@ -75,8 +75,13 @@ always @(*) begin
             if(matrix_count[matrix_num+4:5]==matrix_num)
                 state_next = IDLE;
             else if (finish) begin
+                @(negedge clk);
+                @(negedge clk);
+                @(negedge clk);
+                start_in =1'b1;
+                @(negedge clk);
+                start_in =1'b0;
                 state_next = X_input;
-                start_in   =1'b1;
             end
         end
         default : state  <= IDLE;
