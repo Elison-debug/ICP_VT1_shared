@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module wb(
     input  clk,
     input  rst,
@@ -28,11 +29,10 @@ module wb(
     reg [17:0] result_next [2:0];
 
     //dataRAM and ram enable signal
-    reg [17:0] ram ;
     wire [1:0] count;
     assign count = ram_addr[1:0];
     assign dataRAM[31:18] = 14'b0;
-    assign dataRAM[17: 0] = wb_state ? MU1 : result[count-1];//(wb_state == wb_start) but wb_start=1
+    assign dataRAM[17: 0] = wb_state ? MU1 : result[count-2'b1];//(wb_state == wb_start) but wb_start=1
     assign ram_en = wb_state||web;//(wb_state == wb_start) but wb_start=1
 
 always @(posedge clk or negedge rst) begin

@@ -1,8 +1,13 @@
 clear all;
+num_of_matrix = 2;
+num_A = zeros(8,4,num_of_matrix);
+num_X = zeros(4,8,num_of_matrix);
 % generate 64 random numbers. 
-num_A = randi([0, 255], 64, 1);
-num_X = randi([0, 255], 64, 1);
-
+for i=1:num_of_matrix
+    num_A(i) = randi([0, 255], 8, 4);
+    num_X(i) = randi([0, 255], 4, 8);
+end
+ 
 matrix_A_1 = reshape(num_A(1 :32),8,4); 
 matrix_A_2 = reshape(num_A(33:64),8,4);
 matrix_X_1 = reshape(num_X(1 :32),4,8); 
@@ -10,7 +15,6 @@ matrix_X_2 = reshape(num_X(33:64),4,8);
 
 result_1 = matrix_X_1 * matrix_A_1;
 result_2 = matrix_X_2 * matrix_A_2;
-
 
 % open the file and write in
 fid_A = fopen('user/data/A_input.txt', 'w');

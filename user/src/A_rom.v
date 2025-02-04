@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module A_rom(
     input  clk,
     input  rst,

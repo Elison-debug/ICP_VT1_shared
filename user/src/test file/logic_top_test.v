@@ -1,25 +1,26 @@
+`timescale 1ns / 1ps
 module logic_top_test(
     input  clk,
     input  rst,
-	input  ry,
 	input  cs_n,
 	input  ALU_en,
     input  input_load_en,
 	
     input  [7:0] X_load,
     input  valid_input,
-
+    
+    output ry,
 	output web,
 	output ALU_done,
-	output read_data,
-    output xload_done
+    output xload_done,
+    output [31:0]read_data
 );
 
 // outports wire
-wire [63:0] 	X_reg1;
-wire [63:0] 	X_reg2;
-wire [63:0] 	X_reg3;
-wire [63:0] 	X_reg4;
+wire [7:0] 	X_reg1;
+wire [7:0] 	X_reg2;
+wire [7:0] 	X_reg3;
+wire [7:0] 	X_reg4;
 
 X_buffer u_X_buffer(
 	.clk           	( clk            ),

@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module X_buffer(
     input  clk,
     input  rst,
@@ -35,7 +36,7 @@ module X_buffer(
     assign X_reg4 = s_reg4[63:56];
 
     //load done flag
-    assign xload_done = (count == 5'b11111)? 1'b1:1'b0;
+    assign xload_done = (count == 5'b11111);
 
 always @(posedge clk or negedge rst) begin
     if(!rst) begin
@@ -71,7 +72,7 @@ always @(*) begin
         2'b11 : s_reg4_next = {s_reg4[55:0] , X_load} ;
         //default
         endcase
-        count_next       = count + 5'b1;
+        count_next = count + 5'b1;
     end
     else if(X_shift) begin
         s_reg1_next = {s_reg1[55:0] , s_reg1[63:56]};

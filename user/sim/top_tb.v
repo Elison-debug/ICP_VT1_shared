@@ -6,7 +6,7 @@ module top_tb();
     localparam NUM_KEYS = matrix_num*32;   //total data num
 
     localparam INPUT_FILE = "X_input.txt";
-    reg [6:0] memory [0:NUM_KEYS-1]; // 7 bit memory with 32 * matrix_num entries
+    reg [7:0] memory [0:NUM_KEYS-1]; // 8 bit memory with 32 * matrix_num entries
 
     //FSM state
     parameter IDLE = 2'b00;
@@ -21,22 +21,25 @@ module top_tb();
     reg rst = 0;
 
     // test input signal
-    reg start_in;
-    reg valid_input;
-    reg [6:0] X_load;
-    reg [6:0] X_load_next;
-    
+    reg start_in=0;
+   
     reg [matrix_num+4:0] matrix_count;
     reg [matrix_num+4:0] matrix_count_next;
 
+    wire valid_input;
+    wire [7:0] X_load;
+    assign valid_input = (state == X_input);
+    assign X_load =(state_next == X_input)? memory[matrix_count]:0;
+
     // outports wire
     wire       	finish; 
+    wire [31:0] read_data;
 
 always #(500/MAIN_FRE) clk = ~clk;
 
 
 initial begin
-    $readmemh(INPUT_FILE, memory);
+    $readmemb(INPUT_FILE, memory);
     rst = 1'b0;
     @(negedge clk);
     @(negedge clk);
@@ -49,37 +52,34 @@ end
     
 always @(posedge clk or negedge rst) begin
     if(!rst)begin
-        X_load <= 7'b0; 
         state  <= IDLE;
         matrix_count <= 0; 
     end
     else begin
-        X_load <= X_load_next; 
         state <= state_next;
         matrix_count <= matrix_count_next; 
     end
 end
 
 always @(*) begin
-    X_load_next = X_load;
     state_next = state;
     matrix_count_next = matrix_count;
     case (state)
         IDLE       : begin state_next = start_in ? X_input : IDLE;  end
         X_input    : begin state_next = (matrix_count[4:0]==5'd31) ? next_input : X_input; 
-            start_in = 0;
-            valid_input = 1'b1;            
-            X_load_next = memory[matrix_count];
+            start_in = 0; 
+
             matrix_count_next = matrix_count + 1'b1;
         end
         next_input : begin
             if(matrix_count[matrix_num+4:5]==matrix_num)
                 state_next = IDLE;
-            else if (finish)
+            else if (finish) begin
                 state_next = X_input;
                 start_in   =1'b1;
-            endif
+            end
         end
+        default : state  <= IDLE;
     endcase
 end
 

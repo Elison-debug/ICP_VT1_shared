@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module controller(
     input  clk,
     input  rst,
@@ -55,6 +56,7 @@ always @(*) begin
         shift_input : state_next = xload_done ? ALU : shift_input;//if finish both A and X matrix input then start ALU
         ALU         : state_next = web   ? next_col : ALU;        //if count_mul = 8 start next_col
         next_col    : begin state_next = (count_col == 2'b11) ? IDLE : ALU; count_col_next = count_col + 2'b1;end //if count_col = 3 go IDLE, else back to ALU next col
+        default     : state_next = IDLE;
     endcase
 end
 

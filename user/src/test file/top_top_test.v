@@ -1,12 +1,14 @@
+`timescale 1ns / 1ps
 module top_top_test(
     input  clk,
     input  rst,
-	input  ry,
 	input  cs_n,
     input  start_in,
     input  valid_input,
     input  [7:0] X_load,
-	output read_data,
+    
+    output ry,
+	output [31:0]read_data,
     output finish
 );
 
