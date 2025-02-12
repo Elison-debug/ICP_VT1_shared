@@ -17,10 +17,10 @@ module logic_top(
 );
 
 // outports wire
-wire [63:0] 	X_reg1;
-wire [63:0] 	X_reg2;
-wire [63:0] 	X_reg3;
-wire [63:0] 	X_reg4;
+wire [7:0] 	X_reg1;
+wire [7:0] 	X_reg2;
+wire [7:0] 	X_reg3;
+wire [7:0] 	X_reg4;
 
 X_buffer u_X_buffer(
 	.clk           	( clk            ),
