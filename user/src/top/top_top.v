@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 module top_top(
     input  clk,
     input  rst,
@@ -8,7 +7,7 @@ module top_top(
     input  [7:0] X_load,
     
     output ry,
-	output [31:0]read_data,
+	output [8:0]read_data,
     output finish
 );
 

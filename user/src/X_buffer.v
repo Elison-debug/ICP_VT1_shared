@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 module X_buffer(
     input  clk,
     input  rst,

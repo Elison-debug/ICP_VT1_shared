@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 module A_rom_test(
     input  clk,
     input  rst,

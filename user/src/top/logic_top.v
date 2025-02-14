@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 module logic_top(
     input  clk,
     input  rst,
@@ -12,7 +11,7 @@ module logic_top(
     output ry,
 	output web,
 	output ALU_done,
-	output [31:0]read_data,
+	output [8:0]read_data,
     output xload_done
 );
 

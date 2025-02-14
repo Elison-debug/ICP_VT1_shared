@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 module top_top_test(
     input  clk,
     input  rst,

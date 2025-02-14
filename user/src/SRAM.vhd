@@ -37,7 +37,7 @@ architecture rtl of sram_wrapper is
 begin
 
     DUT_ST_SPHDL_160x32_mem2011: ST_SPHDL_160x32m8_L port map(
-        Q => read_data,
+        Q  => read_data,
         RY => ry,
         CK => clk,
         CSN => cs_n,
