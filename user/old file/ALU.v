@@ -20,9 +20,9 @@ module ALU(
     output reg ALU_done   
 );
     // Reg for the mul op counter. 
-    reg [2:0]   count_mul_r
+    reg [2:0]   count_mul_r;
     reg [2:0]   count_mul_r_next;
-    assign count_mul= count_mul_r
+    assign count_mul= count_mul_r;
     reg [4:0]   global_counter, global_counter_next;
     // 
     reg         X_shift_next; 
