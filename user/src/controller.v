@@ -3,7 +3,6 @@ module controller(
     input  rst,
     input  web,
     input  start_in,
-    input  ALU_done,
     input  xload_done,
 
     output input_load_en,

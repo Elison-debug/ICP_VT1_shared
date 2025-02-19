@@ -21,12 +21,10 @@ controller u_controller(
 	.clk             	( clk              ),
 	.rst             	( rst              ),
 	.start_in        	( start_in         ),
-	.ALU_done 	        ( ALU_done         ),
 	.web                ( web              ),
 	.xload_done      	( xload_done       ),
 	.ALU_en             ( ALU_en           ),
-	.input_load_en   	( input_load_en    ),
-	.finish          	( finish           )
+	.input_load_en   	( input_load_en    )
 );
 
 logic_top u_logic_top(

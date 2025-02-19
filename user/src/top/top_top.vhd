@@ -44,7 +44,6 @@ architecture STRUCTURAL of top_top is
       clk           : in  std_logic;
       rst           : in  std_logic;
       start_in      : in  std_logic;
-      ALU_done      : in  std_logic;
       web           : out std_logic;
       xload_done    : out std_logic;
       ALU_en        : out std_logic;
@@ -73,7 +72,7 @@ architecture STRUCTURAL of top_top is
   -- 内部互联信号
   ------------------------------------------------------------------
   signal clk_core, rst_core, cs_n_core, start_in_core, valid_input_core : std_logic;
-  signal ry_core, ALU_done_core, ALU_done, xload_done, ALU_en, input_load_en, web : std_logic;
+  signal ry_core, ALU_done_core, xload_done, ALU_en, input_load_en, web : std_logic;
   signal X_load_core     : std_logic_vector(7 downto 0);
   signal read_data_core  : std_logic_vector(8 downto 0);
 
@@ -151,7 +150,6 @@ begin
       clk           => clk_core,
       rst           => rst_core,
       start_in      => start_in_core,
-      ALU_done      => ALU_done_core,
       web           => web,
       xload_done    => xload_done,
       ALU_en        => ALU_en,
