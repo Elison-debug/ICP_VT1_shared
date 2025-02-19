@@ -7,8 +7,7 @@ module controller(
     input  xload_done,
 
     output input_load_en,
-    output ALU_en,
-    output finish
+    output ALU_en
 );  
     //FSM state
     parameter IDLE        = 2'b00;
@@ -24,8 +23,6 @@ module controller(
     reg [1:0] count_col;
     reg [1:0] count_col_next;
     
-    //finish output    
-    assign finish = ALU_done;
 
     //enable signal
     assign ALU_en=(state == ALU) ? 1'b1 : 1'b0;

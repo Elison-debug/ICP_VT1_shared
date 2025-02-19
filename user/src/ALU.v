@@ -8,8 +8,7 @@ module ALU(
     input [7:0] X_reg3,  
     input [7:0] X_reg4,
     input       ALU_en,
-    
-    output X_shift,            // sychronized the input resgister in the buffer. 
+               // sychronized the input resgister in the buffer. 
     output [17:0] MU1,     // output result for each mul-sum product seperately
     output [17:0] MU2,
     output [17:0] MU3,
@@ -22,8 +21,7 @@ module ALU(
     reg [4:0] counter, counter_next;
     assign rom_addr  = counter_next[4:1];
 
-    // shift finish and web signal
-    assign X_shift = ALU_en ? 1'b1 : 1'b0;
+    //finish and web signal
     assign ALU_done= (counter[4:0] == 5'd31);
     assign web     = (counter[2:0] == 3'd7);
 

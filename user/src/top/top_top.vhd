@@ -48,8 +48,7 @@ architecture STRUCTURAL of top_top is
       web           : out std_logic;
       xload_done    : out std_logic;
       ALU_en        : out std_logic;
-      input_load_en : out std_logic;
-      finish        : out std_logic
+      input_load_en : out std_logic
     );
   end component;
 
@@ -74,7 +73,7 @@ architecture STRUCTURAL of top_top is
   -- 内部互联信号
   ------------------------------------------------------------------
   signal clk_core, rst_core, cs_n_core, start_in_core, valid_input_core : std_logic;
-  signal ry_core, finish_core, ALU_done, xload_done, ALU_en, input_load_en, web : std_logic;
+  signal ry_core, ALU_done_core, ALU_done, xload_done, ALU_en, input_load_en, web : std_logic;
   signal X_load_core     : std_logic_vector(7 downto 0);
   signal read_data_core  : std_logic_vector(8 downto 0);
 
@@ -140,7 +139,7 @@ begin
 
   finish_pad_inst : CPAD_S_74x50u_OUT
     port map (
-      COREIO => finish_core,
+      COREIO => ALU_done_core,
       PADIO  => finish_pad
     );
 
@@ -152,12 +151,11 @@ begin
       clk           => clk_core,
       rst           => rst_core,
       start_in      => start_in_core,
-      ALU_done      => ALU_done,
+      ALU_done      => ALU_done_core,
       web           => web,
       xload_done    => xload_done,
       ALU_en        => ALU_en,
-      input_load_en => input_load_en,
-      finish        => finish_core
+      input_load_en => input_load_en
     );
 
   logic_top_inst : logic_top
@@ -173,7 +171,7 @@ begin
       xload_done    => xload_done,
       ry            => ry_core,
       read_data     => read_data_core,
-      ALU_done      => ALU_done
+      ALU_done      => ALU_done_core
     );
 
 end STRUCTURAL;
