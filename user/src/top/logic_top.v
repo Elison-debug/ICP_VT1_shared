@@ -1,7 +1,7 @@
 module logic_top(
     input  clk,
     input  rst,
-	input  cs_n,
+	input  read_n,
 	input  ALU_en,
     input  input_load_en,
 	
@@ -72,9 +72,8 @@ ALU u_ALU(
 
 
 // wb outports wire
-
-wire [7:0]      address;
 wire [31:0] 	dataRAM;
+
 
 wb u_wb(
 	.clk     	( clk      ),
@@ -84,19 +83,21 @@ wb u_wb(
 	.MU2     	( MU2      ),
 	.MU3     	( MU3      ),
 	.MU4     	( MU4      ),
-	.ram_en  	( ram_en   ),
-	.address 	( address  ),
+	.we_n  	    ( we_n     ),
+	.w_addr 	( w_addr   ),
 	.dataRAM 	( dataRAM  ) 
 );
 
-sram_wrapper u_sram_wrapper(
-    .clk        (clk       ),
-    .cs_n       (cs_n      ),
-    .we_n       (ram_en    ),
-    .address    (address   ),
-    .write_data (dataRAM   ),
-    .ry         (ry        ),
-    .read_data  (read_data )
+sram_mem u_sram_mem(
+	.clk        	( clk         ),
+	.rst        	( rst         ),
+	.we_n       	( we_n        ),
+	.read_n     	( read_n      ),
+	.w_addr     	( w_addr      ),
+	.r_addr     	( r_addr      ),
+	.write_data 	( dataRAM     ),
+	.ry         	( ry          ),
+	.data_out   	( read_data   )
 );
 
 endmodule

@@ -7,7 +7,7 @@ entity top_top is
     -- 外部 pad 端口（注意均定义为 inout，以便与 pad 单元连接）
     clk_pad         : inout std_logic;
     rst_pad         : inout std_logic;
-    cs_n_pad        : inout std_logic;
+    read_n_pad      : inout std_logic;
     start_in_pad    : inout std_logic;
     valid_input_pad : inout std_logic;
     X_load_pad      : inout std_logic_vector(7 downto 0);
@@ -55,7 +55,7 @@ architecture STRUCTURAL of top_top is
     port (
       clk           : in  std_logic;
       rst           : in  std_logic;
-      cs_n          : in  std_logic;
+      read_n        : in  std_logic;
       ALU_en        : in  std_logic;
       X_load        : in  std_logic_vector(7 downto 0);
       valid_input   : in  std_logic;
@@ -71,7 +71,7 @@ architecture STRUCTURAL of top_top is
   ------------------------------------------------------------------
   -- 内部互联信号
   ------------------------------------------------------------------
-  signal clk_core, rst_core, cs_n_core, start_in_core, valid_input_core : std_logic;
+  signal clk_core, rst_core, read_n_core, start_in_core, valid_input_core : std_logic;
   signal ry_core, ALU_done_core, xload_done, ALU_en, input_load_en, web : std_logic;
   signal X_load_core     : std_logic_vector(7 downto 0);
   signal read_data_core  : std_logic_vector(8 downto 0);
@@ -93,10 +93,10 @@ begin
       PADIO  => rst_pad
     );
 
-  cs_n_pad_inst : CPAD_S_74x50u_IN
+  read_n_pad_inst : CPAD_S_74x50u_IN
     port map (
-      COREIO => cs_n_core,
-      PADIO  => cs_n_pad
+      COREIO => read_n_core,
+      PADIO  => read_n_pad
     );
 
   start_in_pad_inst : CPAD_S_74x50u_IN
@@ -160,7 +160,7 @@ begin
     port map (
       clk           => clk_core,
       rst           => rst_core,
-      cs_n          => cs_n_core,
+      read_n        => read_n_core,
       ALU_en        => ALU_en,
       X_load        => X_load_core,
       valid_input   => valid_input_core,

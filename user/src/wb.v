@@ -7,8 +7,8 @@ module wb(
     input  [17:0] MU3,
     input  [17:0] MU4,
 
-    output ram_en,
-    output [7:0]  address,
+    output we_n,
+    output [7:0]  w_addr,
     output [31:0] dataRAM
 );
     //state
@@ -21,7 +21,7 @@ module wb(
     //ram address
     reg [3:0] ram_addr;
     reg [3:0] ram_addr_next;
-    assign address = {4'b0 , ram_addr};
+    assign w_addr = {4'b0 , ram_addr};
 
     //result buffer
     reg [17:0] result [2:0];
@@ -32,7 +32,7 @@ module wb(
     assign count = ram_addr[1:0];
     assign dataRAM[31:18] = 14'b0;
     assign dataRAM[17: 0] = wb_state ? MU1 : result[count-2'b1];//(wb_state == wb_start) but wb_start=1
-    assign ram_en = wb_state||web;//(wb_state == wb_start) but wb_start=1
+    assign we_n = wb_state||web;//(wb_state == wb_start) but wb_start=1
 
 always @(posedge clk or negedge rst) begin
     if(!rst) begin

@@ -1,7 +1,7 @@
 module top_top(
     input  clk,
     input  rst,
-	input  cs_n,
+	input  read_n,
     input  start_in,
     input  valid_input,
     input  [7:0] X_load,
@@ -30,7 +30,7 @@ controller u_controller(
 logic_top u_logic_top(
 	.clk             	( clk              ),
 	.rst             	( rst              ),
-	.cs_n               ( cs_n             ),
+	.read_n             ( read_n           ),
 	.ALU_en             ( ALU_en           ),
 	.X_load         	( X_load           ),
 	.valid_input     	( valid_input      ),
