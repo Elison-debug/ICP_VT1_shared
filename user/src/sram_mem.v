@@ -65,16 +65,27 @@ module sram_mem(
             end
         endcase
     end
-    wire LOW = 1'b0;
-    ST_SPHDL_160x32m8_L u_sram (
-    .CK         (clk        ),
-    .CSN        (cs_n       ),     
-    .WEN        (we_n       ),       
-    .A          (addr       ),
-    .D          (write_data ), 
-    .Q          (sram_data  ),
-    .RY         (ry         ),
-    .TBYPASS    (LOW        )
+
+        sram_wrapper u_sram (
+    .clk        (clk        ),
+    .cs_n       (cs_n       ),     
+    .we_n       (we_n       ),       
+    .address    (addr       ),
+    .write_data (write_data ), 
+    .read_data  (sram_data  ),
+    .ry         (ry         )
     );
+
+    // wire LOW = 1'b0;
+    // sram_wrapper u_sram (
+    // .CK         (clk        ),
+    // .CSN        (cs_n       ),     
+    // .WEN        (we_n       ),       
+    // .A          (addr       ),
+    // .D          (write_data ), 
+    // .Q          (sram_data  ),
+    // .RY         (ry         ),
+    // .TBYPASS    (LOW        )
+    // );
 
 endmodule
