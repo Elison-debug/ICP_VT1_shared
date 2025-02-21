@@ -50,6 +50,7 @@ module sram_mem(
     end
 
     always @(*) begin
+        data_out_wire = 9'd0;
         case(state)
             IDLE: begin
                 data_out_wire = 9'd0;
@@ -58,10 +59,10 @@ module sram_mem(
                 data_out_wire = data_reg[8:0];
             end
             OUT_NEXT: begin
-                data_out_wire <= data_reg[17:9];
+                data_out_wire = data_reg[17:9];
             end
             default: begin
-                data_out_wire <= 9'd0;
+                data_out_wire = 9'd0;
             end
         endcase
     end

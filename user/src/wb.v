@@ -28,10 +28,12 @@ module wb(
     reg [17:0] result_next [2:0];
 
     //dataRAM and ram enable signal
-    wire [1:0] count;
-    assign count = ram_addr[1:0];
+    wire [2:0] count;
+    wire [2:0] num;
+    assign count = {1'b0,ram_addr[1:0]};
+    assign num   = count - 1'b1;
     assign dataRAM[31:18] = 14'b0;
-    assign dataRAM[17: 0] = wb_state ? MU1 : result[count-2'b1];//(wb_state == wb_start) but wb_start=1
+    assign dataRAM[17: 0] = wb_state ? MU1 : result[num];//(wb_state == wb_start) but wb_start=1
     assign we_n = wb_state||web;//(wb_state == wb_start) but wb_start=1
 
 always @(posedge clk or negedge rst) begin

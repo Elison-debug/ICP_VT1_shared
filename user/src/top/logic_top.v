@@ -4,7 +4,7 @@ module logic_top(
 	input  read_n,
 	input  ALU_en,
     input  input_load_en,
-	
+	input  [7:0] r_addr,
     input  [7:0] X_load,
     input  valid_input,
     
@@ -72,6 +72,7 @@ ALU u_ALU(
 
 
 // wb outports wire
+wire [7:0 ]     w_addr;
 wire [31:0] 	dataRAM;
 
 
