@@ -34,7 +34,7 @@ module wb(
     assign num   = count - 1'b1;
     assign dataRAM[31:18] = 14'b0;
     assign dataRAM[17: 0] = web ? MU1 : result[num];//(wb_state == wb_start) but wb_start=1
-    assign we_n = wb_state||web;//(wb_state == wb_start) but wb_start=1
+    assign we_n =! (wb_state||web);//(wb_state == wb_start) but wb_start=1
 
 always @(posedge clk or negedge rst) begin
     if(!rst) begin
@@ -58,7 +58,7 @@ end
 
 always @(*) begin
     wb_next = wb_state;
-    ram_addr_next  = we_n ? ram_addr + 4'b1 : ram_addr; //if ram en then count else wait
+    ram_addr_next  = we_n? ram_addr : ram_addr + 4'b1 ; //if ram en then count else wait
     result_next[0] = web ? MU2 : result[0];
     result_next[1] = web ? MU3 : result[1];
     result_next[2] = web ? MU4 : result[2];

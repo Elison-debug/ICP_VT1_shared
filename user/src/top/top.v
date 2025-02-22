@@ -7,7 +7,7 @@ module top(
     input      [7:0]  r_addr,       // Address input
     input      [7:0]  X_load,       // X load signal
     output            ry,           
-    output     [8:0]  read_data,    // Read data output
+    output     [8:0]  data_out,    // Read data output
     output            finish     // ALU done flag (goes to finish pad)
 );
 
@@ -39,7 +39,7 @@ module top(
       .web           ( web          ),
       .xload_done    ( xload_done   ),
       .ry            ( ry           ),
-      .read_data     ( read_data    ),
+      .data_out      ( data_out     ),
       .ALU_done      ( finish       )
   );
 

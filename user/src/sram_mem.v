@@ -7,42 +7,42 @@ module sram_mem(
     input  [7:0]  r_addr,
     input  [31:0] write_data,
 
-    output ry,
-    output [8:0] data_out
+    output reg ry,
+    output reg [8:0] data_out
 );
 
     wire        cs_n;
     wire [7:0]  addr;
     wire [31:0] sram_data;
-    assign addr = we_n ? w_addr : r_addr;
-    assign cs_n = !(read_n||we_n);
+    assign addr = we_n ? r_addr:w_addr;
+    assign cs_n = (read_n&&we_n);
 
 
     localparam IDLE      = 2'd0;
-    localparam READ_DATA = 2'd1;
-    localparam OUT_NEXT  = 2'd2;
-
-    reg [8:0] data_out_wire;
-    assign data_out=data_out_wire;
+    localparam WAIT_DATA = 2'd1;
+    localparam READ_DATA = 2'd2;
+    localparam OUT_NEXT  = 2'd3;
 
     reg [1:0] state, next_state;
-    reg [31:0] data_reg;  // data from SRAM
+    reg [8:0] data_buffer;  // data from SRAM
+    reg [8:0] data_buffer_next;
 
     // update state and data
     always @(posedge clk) begin
-        if (rst) begin
+        if (!rst) begin
             state     <= IDLE;
-            data_reg  <= 32'b0;
-        end else begin
-            state     <= next_state;
-            if (state == IDLE)
-                data_reg <= sram_data;
+            data_buffer  <= 32'b0;
+        end 
+        else begin
+            state        <= next_state;
+            data_buffer  <= data_buffer_next;
         end
     end
     //FSM
     always @(*) begin
         case(state)
-            IDLE:      next_state = (read_n&&ry) ? READ_DATA : IDLE;
+            IDLE:      next_state = read_n||(!ry_sram) ? IDLE:WAIT_DATA;
+            WAIT_DATA: next_state = READ_DATA;
             READ_DATA: next_state = OUT_NEXT;
             OUT_NEXT:  next_state = IDLE;
             default:   next_state = IDLE;
@@ -50,43 +50,44 @@ module sram_mem(
     end
 
     always @(*) begin
-        data_out_wire = 9'd0;
+        ry = 1'b0;
+        data_out = 9'd0;
+        data_buffer_next = data_buffer;
         case(state)
             IDLE: begin
-                data_out_wire = 9'd0;
+                ry = 1'b0;
+                data_out = 9'd0;
+            end
+            WAIT_DATA: begin
+                ry = 1'b0;
+                data_out = 9'd0;
             end
             READ_DATA: begin
-                data_out_wire = data_reg[8:0];
+                ry = 1'b1;
+                data_out = sram_data[8:0];
+                data_buffer_next =sram_data[17:9];
             end
             OUT_NEXT: begin
-                data_out_wire = data_reg[17:9];
+                ry = 1'b1;
+                data_out = data_buffer;
             end
             default: begin
-                data_out_wire = 9'd0;
+                ry = 1'b0;
+                data_out = 9'd0;
             end
         endcase
     end
-
-    sram_wrapper u_sram (
-    .clk        (clk        ),
-    .cs_n       (cs_n       ),     
-    .we_n       (we_n       ),       
-    .address    (addr       ),
-    .write_data (write_data ), 
-    .read_data  (sram_data  ),
-    .ry         (ry         )
+wire ry_sram;
+wire LOW = 1'b0;
+    ST_SPHDL_160x32m8_L u_sram (
+    .CK         (clk        ),
+    .CSN        (cs_n       ),     
+    .WEN        (we_n       ),       
+    .A          (addr       ),
+    .D          (write_data ), 
+    .Q          (sram_data  ),
+    .RY         (ry_sram    ),
+    .TBYPASS    (LOW        )
     );
-
-
-    // ST_SPHDL_160x32m8_L u_sram (
-    // .CK         (clk        ),
-    // .CSN        (cs_n       ),     
-    // .WEN        (we_n       ),       
-    // .A          (addr       ),
-    // .D          (write_data ), 
-    // .Q          (sram_data  ),
-    // .RY         (ry         ),
-    // .TBYPASS    (LOW        )
-    // );
 
 endmodule

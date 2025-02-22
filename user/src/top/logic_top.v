@@ -11,7 +11,7 @@ module logic_top(
     output ry,
 	output web,
 	output ALU_done,
-	output [8:0]read_data,
+	output [8:0]data_out,
     output xload_done
 );
 
@@ -98,7 +98,7 @@ sram_mem u_sram_mem(
 	.r_addr     	( r_addr      ),
 	.write_data 	( dataRAM     ),
 	.ry         	( ry          ),
-	.data_out   	( read_data   )
+	.data_out   	( data_out    )
 );
 
 endmodule
