@@ -15,8 +15,8 @@ module wb(
     reg wb_next;
     reg wb_state;
 
-    parameter wb_IDLE  = 1'b0;
-    parameter wb_start = 1'b1;
+    localparam wb_IDLE  = 1'b0;
+    localparam wb_start = 1'b1;
 
     //ram address
     reg [5:0] ram_addr;
@@ -31,14 +31,14 @@ module wb(
     wire [1:0] count;
     wire [1:0] num;
     assign count = ram_addr[1:0];
-    assign num   = count - 1'b1;
+    assign num   = (count==0)? count : count - 1'b1;//to avoid num=3 that out of the range of result vector
     assign dataRAM[31:18] = 14'b0;
     assign dataRAM[17: 0] = web ? MU1 : result[num];//(wb_state == wb_start) but wb_start=1
     assign we_n =! (wb_state||web);//(wb_state == wb_start) but wb_start=1
 
 always @(posedge clk or negedge rst) begin
     if(!rst) begin
-        ram_addr    <= 4'b0;
+        ram_addr    <= 6'b0;
         result [0]  <= 17'b0;
         result [1]  <= 17'b0;
         result [2]  <= 17'b0;
@@ -58,7 +58,7 @@ end
 
 always @(*) begin
     wb_next = wb_state;
-    ram_addr_next  = we_n? ram_addr : ram_addr + 4'b1 ; //if ram en then count else wait
+    ram_addr_next  = we_n? ram_addr : ram_addr + 6'b1 ; //if ram en then count else wait
     result_next[0] = web ? MU2 : result[0];
     result_next[1] = web ? MU3 : result[1];
     result_next[2] = web ? MU4 : result[2];
