@@ -25,14 +25,16 @@ module top_tb();
     reg [matrix_num+4:0] matrix_count;
     reg [matrix_num+4:0] matrix_count_next;
 
+    wire ry;
     wire valid_input;
+    wire [7:0] r_addr;
     wire [7:0] X_load;
     assign valid_input = (state == X_input);
     assign X_load =(state == X_input)? memory[matrix_count]:0;
 
     // outports wire
     wire       	finish; 
-    wire [31:0] read_data;
+    wire [8:0] read_data;
 
 always #(500/MAIN_FRE) clk = ~clk;
 
@@ -73,6 +75,8 @@ always @(*) begin
         next_input : begin
             if(matrix_count[matrix_num+4:5]==matrix_num)
                 state_next = IDLE;
+                
+
             else if (finish) begin
                 @(negedge clk);
                 @(negedge clk);
@@ -89,12 +93,13 @@ end
 
 
 
-top_top_test u_top_top_test(
+top u_top(
 	.clk         	( clk          ),
 	.rst         	( rst          ),
-    .cs_n           ( cs_n         ),
+    .read_n         ( read_n       ),
 	.start_in    	( start_in     ),
 	.valid_input 	( valid_input  ),
+    .r_addr         ( r_addr       ),
 	.X_load      	( X_load       ),
     .ry             ( ry           ),
     .read_data      ( read_data    ),

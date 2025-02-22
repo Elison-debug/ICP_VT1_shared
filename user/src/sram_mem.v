@@ -67,7 +67,7 @@ module sram_mem(
         endcase
     end
 
-        sram_wrapper u_sram (
+    sram_wrapper u_sram (
     .clk        (clk        ),
     .cs_n       (cs_n       ),     
     .we_n       (we_n       ),       
@@ -77,8 +77,8 @@ module sram_mem(
     .ry         (ry         )
     );
 
-    // wire LOW = 1'b0;
-    // sram_wrapper u_sram (
+
+    // ST_SPHDL_160x32m8_L u_sram (
     // .CK         (clk        ),
     // .CSN        (cs_n       ),     
     // .WEN        (we_n       ),       

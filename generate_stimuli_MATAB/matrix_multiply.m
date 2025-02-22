@@ -42,7 +42,7 @@ end
 
 fid_X = fopen('user/data/X_input.txt', 'w');
 if fid_X == -1
-    error('can not get access to the A file');
+    error('can not get access to the x file');
 end
 
 fid_result = fopen('user/data/result.txt', 'w');
@@ -50,13 +50,17 @@ if fid_result == -1
     error('can not get access to the result file');
 end
 
-% every number occupy one single row. 
+fid_result_dec = fopen('user/data/result_dec.txt', 'w');
+if fid_result == -1
+    error('can not get access to the result file');
+end
 
+% every number occupy one single row. 
+A_rom(bin_A);
 fprintf(fid_A, '%s\r\n', bin_A);
 fprintf(fid_X, '%s\r\n', bin_X);
 fprintf(fid_result, '%s\r\n', bin_result);
-
+fprintf(fid_result_dec, '%d\r\n', result);
 % close the file. 
-fclose(fid_A);
 fclose(fid_X);
 fclose(fid_result);

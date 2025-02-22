@@ -19,21 +19,21 @@ module wb(
     parameter wb_start = 1'b1;
 
     //ram address
-    reg [3:0] ram_addr;
-    reg [3:0] ram_addr_next;
-    assign w_addr = {4'b0 , ram_addr};
+    reg [5:0] ram_addr;
+    reg [5:0] ram_addr_next;
+    assign w_addr = {3'b0 , ram_addr};
 
     //result buffer
     reg [17:0] result [2:0];
     reg [17:0] result_next [2:0];
 
     //dataRAM and ram enable signal
-    wire [2:0] count;
-    wire [2:0] num;
-    assign count = {1'b0,ram_addr[1:0]};
+    wire [1:0] count;
+    wire [1:0] num;
+    assign count = ram_addr[1:0];
     assign num   = count - 1'b1;
     assign dataRAM[31:18] = 14'b0;
-    assign dataRAM[17: 0] = wb_state ? MU1 : result[num];//(wb_state == wb_start) but wb_start=1
+    assign dataRAM[17: 0] = web ? MU1 : result[num];//(wb_state == wb_start) but wb_start=1
     assign we_n = wb_state||web;//(wb_state == wb_start) but wb_start=1
 
 always @(posedge clk or negedge rst) begin
@@ -58,13 +58,13 @@ end
 
 always @(*) begin
     wb_next = wb_state;
-    ram_addr_next  = web ? ram_addr + 4'b1 : ram_addr; //if ram en then count else wait
+    ram_addr_next  = we_n ? ram_addr + 4'b1 : ram_addr; //if ram en then count else wait
     result_next[0] = web ? MU2 : result[0];
     result_next[1] = web ? MU3 : result[1];
     result_next[2] = web ? MU4 : result[2];
     case(wb_state)                                   
         wb_IDLE  : wb_next = web ? wb_start : wb_IDLE;//if web = 1 start wb            
-        wb_start : wb_next = (count == 2'b00) ? wb_start : wb_IDLE;//if web = 1 start wb
+        wb_start : wb_next = (count == 2'b11) ?  wb_IDLE:wb_start;//if web = 1 start wb
     endcase 
 end
 
