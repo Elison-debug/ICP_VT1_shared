@@ -10,7 +10,7 @@ module sram_mem(
     output reg ry,
     output reg [8:0] data_out
 );
-
+    wire        ry_sram;   
     wire        cs_n;
     wire [7:0]  addr;
     wire [31:0] sram_data;
@@ -77,7 +77,7 @@ module sram_mem(
             end
         endcase
     end
-wire ry_sram;
+
 wire LOW = 1'b0;
     ST_SPHDL_160x32m8_L u_sram (
     .CK         (clk        ),
