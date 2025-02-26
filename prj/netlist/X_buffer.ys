@@ -1,3 +1,0 @@
-read_verilog -sv -formal -overwrite {workspace}/user/src/X_buffer.v
-design -reset-vlog; proc;
-write_json {workspace}/prj/netlist/X_buffer.json

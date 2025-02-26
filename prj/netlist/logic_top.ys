@@ -1,6 +1,0 @@
-read_verilog -sv -formal -overwrite {workspace}/user/src/ALU.v
-read_verilog -sv -formal -overwrite {workspace}/user/src/A_rom.v
-read_verilog -sv -formal -overwrite {workspace}/user/src/wb.v
-read_verilog -sv -formal -overwrite {workspace}/user/src/top/logic_top.v
-design -reset-vlog; proc;
-write_json {workspace}/prj/netlist/logic_top.json
