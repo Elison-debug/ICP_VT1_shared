@@ -1,0 +1,94 @@
+# This part of PNR script is only for the 32 SRAMs placing
+
+     
+# Intstruction memory place
+   # WEST
+    set SRAM_instr_MACRO [dbGet top.insts.name */instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[*].ram_byte[*].sram_2k1] ; # In this example, all SRAMs are named GENERIC_SRAM_NAME_*_S1P with numbers instead of *
+    set WEST_OFFSET 20 ; # Example offset in vertical edge
+    create_relative_floorplan -place [lindex $SRAM_instr_MACRO 0] -ref_type core_boundary -bbox both -horizontal_edge_separate {0 150 0} -vertical_edge_separate [list 0 $WEST_OFFSET 0]
+
+    for {set i 1} {$i <= 3} {incr i} {
+        set prev [expr {$i - 1}]
+        set idx [expr {$i}]
+        create_relative_floorplan -place [lindex $SRAM_instr_MACRO $i]  -orient R0 -ref_type object -ref [lindex $SRAM_instr_MACRO $prev] -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+        puts "Placed SRAM_instr_MACRO($i)"
+    }
+
+    create_relative_floorplan -place [lindex $SRAM_instr_MACRO 4] -ref_type core_boundary -bbox both -horizontal_edge_separate {2 -125 1} -vertical_edge_separate [list 0 $WEST_OFFSET 0]
+    #create_relative_floorplan -place [lindex $SRAM_instr_MACRO 4] -ref_type object -ref [lindex $SRAM_instr_MACRO 3] -bbox both -horizontal_edge_separate {0 200 0} -vertical_edge_separate {0 0 0}
+    for {set i 5} {$i <= 7} {incr i} {
+        set prev [expr {$i - 1}]
+        set idx [expr {$i}]
+        create_relative_floorplan -place [lindex $SRAM_instr_MACRO $i]  -orient R0 -ref_type object -ref [lindex $SRAM_instr_MACRO $prev] -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+        puts "Placed SRAM_instr_MACRO($i)"
+    }
+
+   # SOUTH
+    create_relative_floorplan -place [lindex $SRAM_instr_MACRO 8] -orient R90 -ref_type core_boundary -bbox both -horizontal_edge_separate {3 20 3} -vertical_edge_separate [list 0 150 0]
+
+    for {set i 9} {$i <= 11} {incr i} {
+        set prev [expr {$i - 1}]
+        set idx [expr {$i}]
+        create_relative_floorplan -place [lindex $SRAM_instr_MACRO $i]  -orient R90 -ref_type object -ref [lindex $SRAM_instr_MACRO $prev] -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+        puts "Placed SRAM_instr_MACRO($i)"
+    }
+
+    create_relative_floorplan -place [lindex $SRAM_instr_MACRO 12] -orient R90 -ref_type object -ref [lindex $SRAM_instr_MACRO 11] -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 30 1}
+    for {set i 13} {$i <= 15} {incr i} {
+        set prev [expr {$i - 1}]
+        set idx [expr {$i}]
+        create_relative_floorplan -place [lindex $SRAM_instr_MACRO $i]  -orient R90 -ref_type object -ref [lindex $SRAM_instr_MACRO $prev] -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+        puts "Placed SRAM_instr_MACRO($i)"
+    }
+
+
+
+
+# Data memory place
+ # EAST
+    set SRAM_DATA_MACRO [dbGet top.insts.name */data_mem/sp_ram_i/ram_row[*].ram_byte[*].sram_2k1] ; # In this example, all SRAMs are named GENERIC_SRAM_NAME_*_S1P with numbers instead of *
+    set EAST_OFFSET 20 ; # Example offset in vertical edge
+    create_relative_floorplan -place [lindex $SRAM_DATA_MACRO 0] -ref_type core_boundary -bbox both -horizontal_edge_separate {0 125 0} -vertical_edge_separate [list 3 -$EAST_OFFSET 3]
+
+    for {set i 1} {$i <= 3} {incr i} {
+        set prev [expr {$i - 1}]
+        set idx [expr {$i}]
+        create_relative_floorplan -place [lindex $SRAM_DATA_MACRO $i]  -orient R0 -ref_type object -ref [lindex $SRAM_DATA_MACRO $prev] -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+        puts "Placed SRAM_DATA_MACRO($i)"
+    }
+
+    create_relative_floorplan -place [lindex $SRAM_DATA_MACRO 4] -ref_type core_boundary -bbox both -horizontal_edge_separate {2 -125 1} -vertical_edge_separate [list 3 -$EAST_OFFSET 3]
+    #create_relative_floorplan -place [lindex $SRAM_DATA_MACRO 4] -ref_type object -ref [lindex $SRAM_DATA_MACRO 3] -bbox both -horizontal_edge_separate {0 200 0} -vertical_edge_separate {0 0 0}
+    for {set i 5} {$i <= 7} {incr i} {
+        set prev [expr {$i - 1}]
+        set idx [expr {$i}]
+        create_relative_floorplan -place [lindex $SRAM_DATA_MACRO $i]  -orient R0 -ref_type object -ref [lindex $SRAM_DATA_MACRO $prev] -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+        puts "Placed SRAM_DATA_MACRO($i)"
+    }
+
+ # NORTH
+    create_relative_floorplan -place [lindex $SRAM_DATA_MACRO 8] -orient R90 -ref_type core_boundary -bbox both -horizontal_edge_separate {1 -20 1} -vertical_edge_separate [list 0 150 0]
+
+    for {set i 9} {$i <= 11} {incr i} {
+        set prev [expr {$i - 1}]
+        set idx [expr {$i}]
+        create_relative_floorplan -place [lindex $SRAM_DATA_MACRO $i]  -orient R90 -ref_type object -ref [lindex $SRAM_DATA_MACRO $prev] -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+        puts "Placed SRAM_DATA_MACRO($i)"
+    }
+
+create_relative_floorplan -place [lindex $SRAM_DATA_MACRO 12] -orient R90 -ref_type object -ref [lindex $SRAM_DATA_MACRO 11] -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 30 1}
+
+    for {set i 13} {$i <= 15} {incr i} {
+        set prev [expr {$i - 1}]
+        set idx [expr {$i}]
+        create_relative_floorplan -place [lindex $SRAM_DATA_MACRO $i]  -orient R90 -ref_type object -ref [lindex $SRAM_DATA_MACRO $prev] -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+        puts "Placed SRAM_DATA_MACRO($i)"
+    }
+
+
+
+
+
+
+
+
