@@ -1,0 +1,2 @@
+setAnalysisMode -analysisType onChipVariation
+set_ccopt_property -name cppr -value both
