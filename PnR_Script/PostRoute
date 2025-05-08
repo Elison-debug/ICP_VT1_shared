@@ -1,2 +1,13 @@
 setAnalysisMode -analysisType onChipVariation
 set_ccopt_property -name cppr -value both
+
+#Setup optimization
+optDesign -postpostRoute
+setOptMode -fixCap true -fixTran false -fixFanoutLoad false
+optDesign -postpostRoute
+setOptMode -fixCap false -fixTran false -fixFanoutLoad true
+
+#Hold optimization 
+optDesign -postpostRoute -hold
+#Increment optimize to get rid of tiny violations
+optDesign -postpostRoute -hold -incr
