@@ -13,7 +13,7 @@ setNanoRouteMode -quiet -routeWithSiDriven false
 routeDesign -globalDetail
 redirect -quiet {set honorDomain [getAnalysisMode -honorClockDomains]} > /dev/null
 timeDesign -postRoute -pathReports -drvReports -slackReports -numPaths 50 -prefix pulpino_top_rtl_w_pads_postRoute -outDir timingReports
-redirect -quiet {set honorDomain [getAnalysisMode -honorClockDomains]} > /dev/null
+#redirect -quiet {set honorDomain [getAnalysisMode -honorClockDomains]} > /dev/null
 
 
 
