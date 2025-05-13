@@ -1,0 +1,14 @@
+# For placing the std Cell
+
+#Set the placement blockage
+setPlaceMode -prerouteAsObs {1 2 3 4 5 6 7 8}
+
+#Set 
+setPlaceMode -fp false
+placeDesign
+
+#PreCTS Setup optimization
+optDesign -preCTS
+setOptMode -fixCap false -fixTran false -fixFanoutLoad true
+#Analyze timing. 
+timeDesign ¨CpreCTS
