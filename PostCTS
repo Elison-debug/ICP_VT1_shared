@@ -1,0 +1,16 @@
+#This is for the POSTCTS optimization, and finally generate the summary table of the both setup and hold mode.
+#Optimization method: 1. Max Cap 2. Max Fanout 3. Hold
+
+#Setup optimization
+optDesign -postCTS
+setOptMode -fixCap true -fixTran false -fixFanoutLoad false
+optDesign -postCTS
+setOptMode -fixCap false -fixTran false -fixFanoutLoad true
+
+#Hold optimization 
+optDesign -postCTS -hold
+#Increment optimize to get rid of tiny violations
+optDesign -postCTS -hold -incr
+
+
+
