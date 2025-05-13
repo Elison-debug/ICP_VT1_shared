@@ -1,0 +1,199 @@
+# Resize the core
+floorPlan -site CORE -s 1700.0 1700.0 20.0 20.0 20.0 20.0
+
+# Use mememory place to get the design(Also have the cmd using for loop)
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1} -orient R90 -ref_type core_boundary -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[3].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1} -orient R90 -ref_type core_boundary -bbox both -horizontal_edge_separate {2 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[3].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1} -orient R90 -ref_type core_boundary -bbox both -horizontal_edge_separate {2 -600 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[3].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1} -orient R180 -ref_type core_boundary -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {0 550 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1} -orient R180 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1} -orient R180 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[3].sram_2k1} -orient R180 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1} -orient R270 -ref_type core_boundary -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 -0 3}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[3].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1} -orient R270 -ref_type core_boundary -bbox both -horizontal_edge_separate {0 600 0} -vertical_edge_separate {3 -0 3}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[3].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1} -orient R270 -ref_type core_boundary -bbox both -horizontal_edge_separate {2 0 1} -vertical_edge_separate {3 -0 3}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[3].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1} -orient R0 -ref_type core_boundary -bbox both -horizontal_edge_separate {1 0 1} -vertical_edge_separate {0 600 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1} -orient R0 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1} -orient R0 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[3].sram_2k1} -orient R0 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1} -orient R90 -ref_type core_boundary -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[3].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1} -orient R90 -ref_type core_boundary -bbox both -horizontal_edge_separate {2 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[3].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1} -orient R90 -ref_type core_boundary -bbox both -horizontal_edge_separate {2 -600 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[3].sram_2k1} -orient R90 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1} -orient R180 -ref_type core_boundary -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {0 550 0}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1} -orient R180 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1} -orient R180 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[3].sram_2k1} -orient R180 -ref_type object -ref {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1} -orient R270 -ref_type core_boundary -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 -0 3}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[3].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1} -orient R270 -ref_type core_boundary -bbox both -horizontal_edge_separate {0 600 0} -vertical_edge_separate {3 -0 3}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[3].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {1 0 3} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1} -orient R270 -ref_type core_boundary -bbox both -horizontal_edge_separate {2 0 1} -vertical_edge_separate {3 -0 3}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[3].sram_2k1} -orient R270 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {3 0 1} -vertical_edge_separate {0 0 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1} -orient R0 -ref_type core_boundary -bbox both -horizontal_edge_separate {1 0 1} -vertical_edge_separate {0 600 0}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1} -orient R0 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1} -orient R0 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+create_relative_floorplan -place {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[3].sram_2k1} -orient R0 -ref_type object -ref {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1} -bbox both -horizontal_edge_separate {0 0 0} -vertical_edge_separate {3 0 1}
+
+#Edit Halo
+addHaloToBlock {10 10 10 10} -allBlock
+addHaloToBlock {10 10 10 10} -allBlock
+
+#Select the Macros for cutting rows 
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1}
+cutRow -selected
+#Deselect all the instances. 
+deselectAll
+
+#Connect the globalNet. 
+clearGlobalNets
+globalNetConnect VDD -type pgpin -pin vdd -inst *
+globalNetConnect GND -type pgpin -pin gnd -inst *
+globalNetConnect GND -type pgpin -pin GNDC -inst *
+globalNetConnect VDD -type pgpin -pin VDDC -inst *
+globalNetConnect VDD -type tiehi -inst *
+globalNetConnect GND -type tielo -inst *
+#set sprCreateIeRingNets {}
+#set sprCreateIeRingLayers {}
+#set sprCreateIeRingWidth 1.0
+#set sprCreateIeRingSpacing 1.0
+#set sprCreateIeRingOffset 1.0
+#set sprCreateIeRingThreshold 1.0
+#set sprCreateIeRingJogDistance 1.0
+
+#Get the Power Ring M3 H/ M4 V
+addRing -skip_via_on_wire_shape Noshape -skip_via_on_pin Standardcell -stacked_via_top_layer AP -type core_rings -jog_distance 0.4 -threshold 0.4 -nets {GND VDD} -follow core -stacked_via_bottom_layer M1 -layer {bottom M3 top M3 right M4 left M4} -width 2 -spacing 2 -offset 2
+
+#Select the Memory Inst and edit the power Ring excluse the shared rings with the core boundaries. 
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[1].ram_byte[3].sram_2k1}
+addRing -skip_via_on_wire_shape Noshape -skip_via_on_pin Standardcell -stacked_via_top_layer AP -around selected -jog_distance 0.4 -threshold 0.4 -type block_rings -nets {GND VDD} -follow core -stacked_via_bottom_layer M1 -layer {bottom M3 top M3 right M4 left M4} -width 2 -spacing 2 -offset 2 -skip_side {left top}
+deselectAll
+
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[2].ram_byte[3].sram_2k1}
+addRing -skip_via_on_wire_shape Noshape -skip_via_on_pin Standardcell -stacked_via_top_layer AP -around selected -jog_distance 0.4 -threshold 0.4 -type block_rings -nets {GND VDD} -follow core -stacked_via_bottom_layer M1 -layer {bottom M3 top M3 right M4 left M4} -width 2 -spacing 2 -offset 2 -skip_side left
+deselectAll
+
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1}
+addRing -skip_via_on_wire_shape Noshape -skip_via_on_pin Standardcell -stacked_via_top_layer AP -around selected -jog_distance 0.4 -threshold 0.4 -type block_rings -nets {GND VDD} -follow core -stacked_via_bottom_layer M1 -layer {bottom M3 top M3 right M4 left M4} -width 2 -spacing 2 -offset 2 -skip_side {left bottom}
+deselectAll
+
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/instr_mem/sp_ram_wrap_i/sp_ram_i/ram_row[3].ram_byte[3].sram_2k1}
+addRing -skip_via_on_wire_shape Noshape -skip_via_on_pin Standardcell -stacked_via_top_layer AP -around selected -jog_distance 0.4 -threshold 0.4 -type block_rings -nets {GND VDD} -follow core -stacked_via_bottom_layer M1 -layer {bottom M3 top M3 right M4 left M4} -width 2 -spacing 2 -offset 2 -skip_side bottom
+deselectAll
+
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[0].ram_byte[0].sram_2k1}
+addRing -skip_via_on_wire_shape Noshape -skip_via_on_pin Standardcell -stacked_via_top_layer AP -around selected -jog_distance 0.4 -threshold 0.4 -type block_rings -nets {GND VDD} -follow core -stacked_via_bottom_layer M1 -layer {bottom M3 top M3 right M4 left M4} -width 2 -spacing 2 -offset 2 -skip_side {bottom right}
+deselectAll
+
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[3].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[3].ram_byte[0].sram_2k1}
+addRing -skip_via_on_wire_shape Noshape -skip_via_on_pin Standardcell -stacked_via_top_layer AP -around selected -jog_distance 0.4 -threshold 0.4 -type block_rings -nets {GND VDD} -follow core -stacked_via_bottom_layer M1 -layer {bottom M3 top M3 right M4 left M4} -width 2 -spacing 2 -offset 2 -skip_side right
+deselectAll
+
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[1].ram_byte[3].sram_2k1}
+addRing -skip_via_on_wire_shape Noshape -skip_via_on_pin Standardcell -stacked_via_top_layer AP -around selected -jog_distance 0.4 -threshold 0.4 -type block_rings -nets {GND VDD} -follow core -stacked_via_bottom_layer M1 -layer {bottom M3 top M3 right M4 left M4} -width 2 -spacing 2 -offset 2 -skip_side {top right}
+deselectAll
+
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[0].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[1].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[2].sram_2k1}
+selectInst {top/core_region_i/data_mem/sp_ram_i/ram_row[2].ram_byte[3].sram_2k1}
+addRing -skip_via_on_wire_shape Noshape -skip_via_on_pin Standardcell -stacked_via_top_layer AP -around selected -jog_distance 0.4 -threshold 0.4 -type block_rings -nets {GND VDD} -follow core -stacked_via_bottom_layer M1 -layer {bottom M3 top M3 right M4 left M4} -width 2 -spacing 2 -offset 2 -skip_side top
+deselectAll
+
+#Add the power stripes. 
+#set sprCreateIeStripeNets {}
+#set sprCreateIeStripeLayers {}
+#set sprCreateIeStripeWidth 10.0
+#set sprCreateIeStripeSpacing 2.0
+#set sprCreateIeStripeThreshold 1.0
+
+addStripe -skip_via_on_wire_shape Noshape -block_ring_top_layer_limit M1 -max_same_layer_jog_length 6 -padcore_ring_bottom_layer_limit M1 -set_to_set_distance 100 -skip_via_on_pin Standardcell -stacked_via_top_layer AP -padcore_ring_top_layer_limit M1 -spacing 2 -merge_stripes_value 2.5 -direction horizontal -layer M3 -block_ring_bottom_layer_limit M1 -stop_x 0 -stop_y 0 -width 2 -area {} -nets {GND VDD} -start_x 0 -stacked_via_bottom_layer M1 -start_y 0
+addStripe -skip_via_on_wire_shape Noshape -block_ring_top_layer_limit M1 -max_same_layer_jog_length 6 -padcore_ring_bottom_layer_limit M1 -set_to_set_distance 100 -skip_via_on_pin Standardcell -stacked_via_top_layer AP -padcore_ring_top_layer_limit M1 -spacing 2 -merge_stripes_value 2.5 -direction vertical -layer M4 -block_ring_bottom_layer_limit M1 -stop_x 0 -stop_y 0 -width 2 -area {} -nets {GND VDD} -start_x 0 -stacked_via_bottom_layer M1 -start_y 0
+
+#Add the WellTap. 
+addWellTap -cell HS65_LH_FILLERNPWPFP4 -cellInterval 25 -prefix WELLTAP
+
