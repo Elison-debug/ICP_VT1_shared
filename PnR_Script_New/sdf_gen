@@ -1,0 +1,3 @@
+write_sdf -version 3.0 top_top_pnr_g5.sdf -map_file /usr/local-eit/cad2/cmpstm/oldmems/mem2010/SPHDL100909-40446@1.0/behaviour/verilog/SPHDL100909.verilog.map -precision 4 -min_view FF -max_view SS
+
+write_sdf -version 3.0 top_top_pnr_g5_pt.sdf -map_file {/usr/local-eit/cad2/cmpstm/oldmems/mem2010/SPHDL100909-40446@1.0/behaviour/verilog/SPHDL100909.verilog.map , /usr/local-eit/cad2/cmpstm/oldmems/mem2010/SPHDL100909-40446@1.0/behaviour/verilog/SPHDL100909_allpins.v} -precision 4 -min_view FF -max_view SS
